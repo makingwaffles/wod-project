@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=UnifrakturCook&family=IBM+Plex+Mono&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Inter:wght@300;400&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <title>WoD Settings</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="theme-estonia">
+
+    <div class="sidebar">
+
+     <div class="logo">
+        <h2>World of Darkness</h2>
+      </div>
+    
+      <nav class="menu">
+        <div class="menu-item active">Settings</div>
+        <div class="menu-item">Chronicles</div>
+        <div class="menu-item">Factions</div>
+        <div class="menu-item">Lore</div>
+        <div class="menu-item" onclick="openPDF('WodMage20th.pdf')">
+  Resources
+</div>
+        <div class="menu-item">About</div>
+      </nav>
+    
+      <div class="quick">
+        <p>Quick Select</p>
+            <div class="quick-item" onclick="changeSetting('berlin', event)">1850 Berlin</div>
+            <div class="quick-item" onclick="changeSetting('coastal', event)">1890 Coastal</div>
+            <div class="quick-item" onclick="changeSetting('prague', event)">1920 Prague</div>
+            <div class="quick-item" onclick="changeSetting('newengland', event)">1980 New England</div>
+            <div class="quick-item" onclick="changeSetting('space', event)">2300 Space</div>
+      </div>
+
+      <div id="mapOverlay" class="map-overlay" onclick="closeMap()">
+        <img id="mapOverlayImg" src="">
+      </div>
+
+</div>
+
+  <!-- AMBIENT -->
+  <div class="ambient"></div>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-text">
+      <h1 id="title">1950s Estonia</h1>
+      <p id="tagline" class="tagline">Old songs, whispered softer each year.</p>
+    </div>
+  </section>
+
+  <!-- CONTENT -->
+  <section class="content">
+    <div class="left">
+
+      <div class="box">
+        <h2 id="section1Title">Life in the Village</h2>
+        <p id="box1">Quiet routines. Watchful eyes.</p>
+      </div>
+
+      <div class="box">
+        <h2 id="section2Title">Glamour</h2>
+        <p id="box2">Old songs still hold power.</p>
+      </div>
+
+      <div class="box">
+        <h2 id="section3Title">Banality</h2>
+        <p id="box3">Fear creeps into daily life.</p>
+      </div>
+
+    </div>
+
+    <div class="right">
+
+      <div class="map">
+       
+           <div class="map-wrapper">
+             <img id="mapimg" src="1950map.png" onclick="openMap(this.src)">
+             <div class="map-label" id="maplabel">Varjuküla</div>
+        </div>
+      </div>
+
+      <div class="locations">
+        <h2>Key Locations</h2>
+        <ul id="locations">
+          <li>The Forest Edge</li>
+          <li>The River</li>
+        </ul>
+      </div>
+
+    </div>
+  </section>
+
+<div id="pdfViewer" class="pdf-viewer">
+  <button class="pdf-close" onclick="closePDF()">✕</button>
+  <iframe id="pdfFrame"></iframe>
+</div>
+  <!-- TIMELINE -->
+  <section class="timeline">
+    <div class="node" onclick="changeSetting('berlin', this)">1850</div>
+    <div class="node" onclick="changeSetting('coastal', this)">1890</div>
+    <div class="node" onclick="changeSetting('prague', this)">1920</div>
+    <div class="node active" onclick="changeSetting('estonia', this)">1950</div>
+    <div class="node" onclick="changeSetting('newengland', this)">1980</div>
+    <div class="node" onclick="changeSetting('space', this)">2300</div>
+  </section>
+
+<script>
+const settings = {
+  estonia: {
+    theme: "theme-estonia",
+    title: "1950s Estonia",
+    tagline: "Old songs, whispered softer each year.",
+    image: "1950estonia.avif",
+    mapImage: "1950map.png",
+    mapLabel: "Varjuküla",
+
+    section1Title: "Life Beneath the Surface",
+    section2Title: "Echoes of the Old Ways",
+    section3Title: "The Weight of Silence",
+
+    box1: "Quiet routines. Watchful eyes...",
+    box2: "Old songs, rituals...",
+    box3: "Fear, control...",
+
+    locations: ["Forest Edge","River","Old House"]
+  },
+
+    berlin: {
+      theme: "theme-berlin",
+      title: "1850s Berlin",
+      tagline: "Revolution under gaslight.",
+      image: "1850berlin.jpg",
+
+      mapImage: "1850map.png",
+      mapLabel: "Berlin (Industrial Districts)",
+
+      section1Title: "Life in the Machine",
+      section2Title: "Power Structures",
+      section3Title: "Crushing Order",
+
+      box1: "Crowded streets.",
+      box2: "Power structures.",
+      box3: "Industry dominates.",
+
+      locations: ["Factory District","Workers’ Quarter","Underground Tunnels"]
+  },
+
+newengland: {
+  theme: "theme-newengland",
+  title: "1980s New England",
+  tagline: "Small town secrets.",
+  image: "1980evergreenHaven.png",
+
+  mapImage: "1980map.png",
+  mapLabel: "Evergreen Haven",
+
+  section1Title: "Small Town Life",
+  section2Title: "Strange Happenings",
+  section3Title: "Things Unspoken",
+
+  box1: "Everyone knows.",
+  box2: "Something listens.",
+  box3: "Ignored truths.",
+
+  locations: ["School","Woods","Main Street"]
+
+  },
+
+  prague: {
+    theme: "theme-prague",
+    title: "1920s Prague",
+    tagline: "Occultism and decay.",
+    image: "1920prague.png",
+
+    mapImage: "1920map.png",
+    mapLabel: "Praha",
+
+    section1Title: "A City of Secrets",
+    section2Title: "Occult Undercurrents",
+    section3Title: "Decay Behind Beauty",
+
+    box1: "Artists & secrets.",
+    box2: "Occult knowledge.",
+    box3: "Hidden decay.",
+
+    locations: ["Old Town Square","Charles Bridge"]
+  },
+
+    coastal: {
+    theme: "theme-coastal",
+    title: "1890s Coastal",
+    tagline: "The sea remembers.",
+    image: "1890coastal.png",
+
+    mapImage: "1890map.png",
+    mapLabel: "raven`s point",
+
+    section1Title: "Life by the Sea",
+    section2Title: "Whispers from the Deep",
+    section3Title: "Salt and Silence",
+
+    box1: "Isolation.",
+    box2: "Ocean power.",
+    box3: "Secrets in waves.",
+
+    locations: ["Harbor","Cliffs","Lighthouse"]
+  },
+
+space: {
+  theme: "theme-space",
+  title: "2300 Deep Space",
+  tagline: "Something watches.",
+  image: "2300space.png",
+
+  mapImage: "2300map.png",
+  mapLabel: "Station Erebos",
+
+  section1Title: "Life in Isolation",
+  section2Title: "Systems and Control",
+  section3Title: "Unknown Signals",
+
+  box1: "Isolation.",
+  box2: "Technology rules.",
+  box3: "Unknown presence.",
+
+  locations: ["Command Deck","Crew Quarters","Maintenance Tunnels"]
+}
+};
+
+/* ===== CACHE ===== */
+const body = document.body;
+const hero = document.querySelector(".hero");
+const heroText = document.querySelector(".hero-text");
+
+const title = document.getElementById("title");
+const tagline = document.getElementById("tagline");
+
+const section1 = document.getElementById("section1Title");
+const section2 = document.getElementById("section2Title");
+const section3 = document.getElementById("section3Title");
+
+const box1 = document.getElementById("box1");
+const box2 = document.getElementById("box2");
+const box3 = document.getElementById("box3");
+
+const locations = document.getElementById("locations");
+
+const mapimg = document.getElementById("mapimg");
+const maplabel = document.getElementById("maplabel");
+
+/* ===== CHANGE SETTING ===== */
+function changeSetting(setting) {
+
+  const data = settings[setting];
+  if (!data) return;
+
+  body.classList.add("fade-out");
+
+  setTimeout(() => {
+
+    /* active state sync */
+    document.querySelectorAll('.node, .quick-item')
+      .forEach(el => el.classList.remove('active'));
+
+    document.querySelectorAll(`[onclick*="${setting}"]`)
+      .forEach(el => el.classList.add('active'));
+
+    /* theme */
+    body.className = data.theme;
+
+    /* text */
+    title.innerText = data.title;
+    tagline.innerText = data.tagline;
+
+    section1.innerText = data.section1Title;
+    section2.innerText = data.section2Title;
+    section3.innerText = data.section3Title;
+
+    box1.innerText = data.box1;
+    box2.innerText = data.box2;
+    box3.innerText = data.box3;
+
+    /* locations */
+    locations.innerHTML = data.locations
+      .map(l => `<li>${l}</li>`)
+      .join("");
+
+    /* hero image */
+    if (data.image) {
+      hero.style.backgroundImage =
+        `linear-gradient(rgba(0,0,0,0.25), rgba(0,0,0,0.5)), url('${data.image}')`;
+    }
+
+    /* map */
+    if (data.mapImage) mapimg.src = data.mapImage;
+    if (data.mapLabel) maplabel.innerText = data.mapLabel;
+
+    /* animation reset */
+    heroText.style.animation = "none";
+    heroText.offsetHeight;
+    heroText.style.animation = "";
+
+    body.classList.remove("fade-out");
+
+  }, 200);
+}
+
+/* ===== PARALLAX ===== */
+document.addEventListener("mousemove", (e) => {
+  const x = (e.clientX / window.innerWidth - 0.5) * 6;
+  const y = (e.clientY / window.innerHeight - 0.5) * 6;
+  hero.style.backgroundPosition = `${50 + x}% ${50 + y}%`;
+});
+
+/* ===== MAP OVERLAY ===== */
+function openMap(src) {
+  const overlay = document.getElementById("mapOverlay");
+  const img = document.getElementById("mapOverlayImg");
+
+  img.src = src;
+  overlay.style.display = "flex";
+}
+
+function closeMap() {
+  document.getElementById("mapOverlay").style.display = "none";
+}
+
+/* ===== INIT ===== */
+window.onload = () => changeSetting("estonia");
+
+function openPDF(file) {
+  const viewer = document.getElementById("pdfViewer");
+  const frame = document.getElementById("pdfFrame");
+
+  frame.src = file;
+  viewer.style.display = "block";
+}
+
+function closePDF() {
+  document.getElementById("pdfViewer").style.display = "none";
+}
+
+</script>
+</body>
+</html>

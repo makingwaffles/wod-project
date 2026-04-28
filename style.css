@@ -1,0 +1,496 @@
+/* ===== BASE ===== */
+body {
+  margin-left: 220px;
+  font-family: 'Inter', sans-serif;
+
+  /* 🔥 fallback hvis theme ikke er satt */
+  --bg: #0e1512;
+  --text: #e2e8e2;
+  --accent: #8fae8f;
+  --heading-font: 'Cinzel', serif;
+
+  background: var(--bg);
+  color: var(--text);
+
+  transition: opacity 0.3s ease;
+}
+
+h1, h2 {
+  font-family: var(--heading-font);
+  color: var(--accent);
+}
+
+/* ===== SIDEBAR ===== */
+.sidebar {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 220px;
+  height: 100vh;
+
+  background: rgba(5,10,8,0.95);
+  border-right: 1px solid rgba(255,255,255,0.05);
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  padding: 20px;
+  z-index: 1001;
+  overflow-y: auto;
+  padding-bottom: 40px;
+}
+
+/* Logo */
+.logo {
+  font-family: 'Cinzel', serif;
+  color: var(--accent);
+  margin-bottom: 20px;
+}
+
+/* Menu */
+.menu {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.menu-item {
+  padding: 10px;
+  cursor: pointer;
+  opacity: 0.6;
+  transition: 0.3s;
+  border-left: 2px solid transparent;
+  transition: all 0.2s ease;
+}
+
+.menu-item:hover {
+  opacity: 1;
+  color: var(--accent);
+  transform: translateX(5px);
+  text-shadow: 0 0 6px var(--accent);
+}
+
+.menu-item.active {
+  opacity: 1;
+  color: var(--accent);
+  border-left: 2px solid var(--accent);
+}
+
+/* Quick select */
+.quick {
+  font-size: 12px;
+  opacity: 0.7;
+}
+
+.quick p {
+  margin-bottom: 10px;
+  text-transform: uppercase;
+  font-size: 11px;
+  letter-spacing: 1px;
+}
+
+.quick-item {
+  cursor: pointer;
+  padding: 5px 0;
+  transition: 0.2s;
+}
+
+.quick-item:hover {
+  color: var(--accent);
+  padding-left: 5px;
+}
+
+.quick-item:last-child {
+  margin-bottom: 20px;
+}
+/* ===== HERO ===== */
+.hero {
+  position: relative;
+  height: 50vh;
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  align-items: center;
+  padding: 40px;
+  margin-top: 70px;
+
+  box-shadow: inset 0 -100px 150px rgba(0,0,0,0.6);
+}
+
+.hero-text {
+  animation: fadeIn 1s ease;
+  max-width: 700px;
+  margin: 0 auto;      /* 👈 sentrerer */
+  text-align: center;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.tagline {
+  font-style: italic;
+  opacity: 0.85;
+  margin-top: 10px;
+  font-size: 18px;
+  margin-left: 8px;
+}
+
+/* ===== CONTENT ===== */
+.content {
+  display: flex;
+  gap: 40px;
+  padding: 40px 80px;  /* 👈 mer luft på sidene */
+}
+
+.left, .right {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.left { width: 60%; }
+.right { width: 40%; }
+
+/* ===== BOXES ===== */
+.box {
+  padding: 20px;
+  border-radius: 8px;
+  transition: 0.2s;
+  animation: float 6s ease-in-out infinite;
+}
+.box p {
+  line-height: 1.6;
+  max-width: 90%;
+}
+
+.box:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 0 15px var(--accent);
+}
+
+/* ===== MAP + LOCATIONS ===== */
+.map, .locations {
+  padding: 20px;
+  border-radius: 8px;
+}
+
+.locations ul {
+  padding-left: 20px;
+}
+
+/* ===== TIMELINE ===== */
+.timeline {
+  position: fixed;
+  top: 0;
+  width: calc(100% - 220px);
+  display: flex;
+  justify-content: space-around;
+  padding: 20px 40px 30px;
+  left: 220px;
+  background: rgba(10,15,12,0.9);
+  backdrop-filter: blur(6px);
+
+  z-index: 1000;
+}
+
+.timeline::before {
+  content: "";
+  position: absolute;
+  left: 40px;
+  right: 40px;
+  top: calc(100% - 8px);
+  height: 1px;
+  background: rgba(255,255,255,0.15);
+}
+
+.node {
+  position: relative;
+  opacity: 0.5;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.node::after {
+  content: "";
+  position: absolute;
+  bottom: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.3);
+}
+
+.node:hover {
+  opacity: 1;
+  color: var(--accent);
+}
+
+.node:hover::after {
+  background: var(--accent);
+  transform: translateX(-50%) scale(1.5);
+}
+
+.node.active {
+  color: var(--accent);
+}
+
+.node.active::after {
+  background: var(--accent);
+  transform: translateX(-50%) scale(1.8);
+}
+
+/* ===== ATMOSPHERE ===== */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: url("https://www.transparenttextures.com/patterns/noise.png");
+  opacity: 0.05;
+  pointer-events: none;
+}
+
+/* ===== FLOAT ===== */
+@keyframes float {
+  0%,100% { transform: translateY(0); }
+  50% { transform: translateY(-2px); }
+}
+
+/* ===== THEMES ===== */
+
+/* Estonia */
+.theme-estonia {
+  --bg: #0e1512;
+  --accent: #8fae8f;
+  --text: #e2f0e2;
+  --heading-font: 'Cinzel', serif;
+}
+
+.theme-estonia .box,
+.theme-estonia .map,
+.theme-estonia .locations {
+  background: rgba(20,40,25,0.6);
+}
+
+/* Berlin */
+.theme-berlin {
+  --bg: #121212;
+  --accent: #c9a36a;
+  --text: #f2e6d0;
+  --heading-font: 'IBM Plex Mono', monospace;
+}
+
+.theme-berlin .box,
+.theme-berlin .map,
+.theme-berlin .locations {
+  background: #1a1a1a;
+}
+
+/* Coastal */
+.theme-coastal {
+  --bg: #0b1a1f;
+  --accent: #6fa3a3;
+  --text: #e0f4f4;
+  --heading-font: 'Playfair Display', serif;
+}
+
+.theme-coastal .box,
+.theme-coastal .map,
+.theme-coastal .locations {
+  background: rgba(10,20,25,0.7);
+}
+
+.theme-prague {
+  --bg: #0f0a16;
+  --accent: #7c5a9e;
+  --text: #ede6f7;
+  --heading-font: 'Cinzel', serif;
+}
+
+.theme-prague .box,
+.theme-prague .map,
+.theme-prague .locations {
+  background: linear-gradient(
+    180deg,
+    rgba(40, 15, 60, 0.5),
+    rgba(20, 10, 30, 0.7)
+  );
+  border: 1px solid rgba(124, 90, 158, 0.25);
+  box-shadow:
+    0 0 20px rgba(124, 90, 158, 0.1),
+    inset 0 0 20px rgba(0, 0, 0, 0.6);
+
+}
+/* New England */
+.theme-newengland {
+  --bg: #1c1a17;
+  --accent: #b08d57;
+  --text: #f3e9dc;
+  --heading-font: 'Inter', sans-serif;
+}
+
+.theme-newengland .box,
+.theme-newengland .map,
+.theme-newengland .locations {
+  background: rgba(50,40,30,0.5);
+}
+
+/* Space */
+.theme-space {
+  --bg: #05080d;
+  --accent: #5cc8ff;
+  --text: #dff6ff;
+  --heading-font: 'Orbitron', sans-serif;
+}
+
+.theme-space .box,
+.theme-space .map,
+.theme-space .locations {
+  background: rgba(0,10,20,0.8);
+}
+/* ===== AMBIENT ===== */
+.ambient {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 5;
+  mix-blend-mode: screen;
+}
+
+/* Estonia glow */
+.theme-estonia .ambient {
+  background: radial-gradient(circle at 30% 70%, rgba(143,174,143,0.15), transparent);
+}
+
+/* Coastal fog */
+.theme-coastal .ambient {
+  background: radial-gradient(circle, rgba(200,255,255,0.08), transparent);
+  animation: fog 20s linear infinite;
+}
+
+/* Prague pulse */
+.theme-prague .ambient {
+  background: radial-gradient(circle, rgba(124, 90, 158, 0.15), transparent);
+}
+
+/* Space scanlines */
+.theme-space .ambient {
+  background: repeating-linear-gradient(
+    to bottom,
+    rgba(92,200,255,0.05) 1px,
+    transparent 3px
+  );
+}
+
+.map-wrapper {
+  position: relative;
+}
+
+.map-wrapper img {
+  width: 100%;
+  border-radius: 6px;
+  filter: brightness(0.9) contrast(1.1);
+}
+
+.map-label {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  color: var(--accent);
+  font-size: 14px;
+  letter-spacing: 1px;
+  text-shadow: 0 0 6px black;
+}
+
+.map-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.85);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 2000;
+}
+
+.map-overlay img {
+  max-width: 90%;
+  max-height: 90%;
+  border: 1px solid var(--accent);
+  box-shadow: 0 0 40px rgba(0,0,0,0.8);
+  border-radius: 6px;
+  cursor: zoom-out;
+}
+
+.map-wrapper img {
+  cursor: zoom-in;
+}
+
+.map-wrapper img {
+  cursor: zoom-in;
+  transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+.map-wrapper img:hover {
+  transform: scale(1.03);
+  filter: brightness(1.05);
+}
+
+.pdf-viewer {
+  position: fixed;
+  left: 220px;
+  top: 70px;
+
+  width: calc(100% - 220px);
+  height: calc(100% - 70px);
+
+  background: #0a0f0c;
+
+  display: none;
+  z-index: 1500;
+
+  overflow: hidden; /* 👈 viktig */
+}
+
+.pdf-viewer iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+
+  display: block; /* 👈 fjerner rare margins */
+}
+@keyframes fadeInPDF {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.pdf-close {
+  position: absolute;
+  top: 12px;
+  right: 20px;
+
+  background: none;
+  border: none;
+  color: var(--accent);
+  font-size: 22px;
+  cursor: pointer;
+
+  opacity: 0.7;
+  transition: 0.2s;
+}
+
+.pdf-close:hover {
+  opacity: 1;
+  transform: scale(1.2);
+}
+
+.pdf-viewer::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.5);
+  z-index: -1;
+}
