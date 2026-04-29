@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=UnifrakturCook&family=IBM+Plex+Mono&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Orbitron&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Inter:wght@300;400&display=swap" rel="stylesheet">
@@ -30,10 +31,12 @@
     
       <div class="quick">
         <p>Quick Select</p>
+            <div class="quick-item" onclick="changeSetting('carpathian', event)">1650 Carpathian Woods</div>
             <div class="quick-item" onclick="changeSetting('berlin', event)">1850 Berlin</div>
             <div class="quick-item" onclick="changeSetting('coastal', event)">1890 Coastal</div>
             <div class="quick-item" onclick="changeSetting('prague', event)">1920 Prague</div>
-            <div class="quick-item" onclick="changeSetting('newengland', event)">1980 New England</div>
+            <div class="quick-item" onclick="changeSetting('evergreen', this)">1980 Evergreen</div>
+            <div class="quick-item" onclick="changeSetting('tokyo', event)">2005 Tokyo</div>
             <div class="quick-item" onclick="changeSetting('space', event)">2300 Space</div>
       </div>
 
@@ -46,13 +49,34 @@
   <!-- AMBIENT -->
   <div class="ambient"></div>
 
-  <!-- HERO -->
-  <section class="hero">
-    <div class="hero-text">
-      <h1 id="title">1950s Estonia</h1>
-      <p id="tagline" class="tagline">Old songs, whispered softer each year.</p>
-    </div>
-  </section>
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-text">
+    <h1 id="title">1950s Estonia</h1>
+    <p id="tagline" class="tagline">Old songs, whispered softer each year.</p>
+  </div>
+</section>
+
+<!-- SYSTEM MENU START -->
+<div class="system-selector">
+
+  <div class="system-group">
+    <p>World of Darkness</p>
+    <button data-system="vampire" onclick="changeSystem('vampire', this)">Vampire</button>
+    <button data-system="werewolf" onclick="changeSystem('werewolf', this)">Werewolf</button>
+    <button data-system="mage" onclick="changeSystem('mage', this)">Mage</button>
+    <button data-system="changeling" class="active" onclick="changeSystem('changeling', this)">Changeling</button>
+    <button data-system="hunter" onclick="changeSystem('hunter', this)">Hunter</button>
+    <button data-system="wraith" onclick="changeSystem('wraith', this)">Wraith</button>
+    <button data-system="promethean" onclick="changeSystem('promethean', this)">Promethean</button>
+    <button data-system="coc" onclick="changeSystem('coc', this)">Call of Cthulhu</button>
+    <button data-system="kob" onclick="changeSystem('kob', this)">Kids on Bikes</button>
+    <button data-system="ghosthunter" onclick="changeSystem('ghosthunter', this)">Ghost Hunter</button>
+  </div>
+</div>
+
+<!-- SYSTEM MENU END -->
+
 
   <!-- CONTENT -->
   <section class="content">
@@ -96,77 +120,443 @@
     </div>
   </section>
 
+
+
 <div id="pdfViewer" class="pdf-viewer">
   <button class="pdf-close" onclick="closePDF()">✕</button>
   <iframe id="pdfFrame"></iframe>
 </div>
   <!-- TIMELINE -->
   <section class="timeline">
+    <div class="node" onclick="changeSetting('carpathian', this)">1650</div>
     <div class="node" onclick="changeSetting('berlin', this)">1850</div>
     <div class="node" onclick="changeSetting('coastal', this)">1890</div>
     <div class="node" onclick="changeSetting('prague', this)">1920</div>
     <div class="node active" onclick="changeSetting('estonia', this)">1950</div>
-    <div class="node" onclick="changeSetting('newengland', this)">1980</div>
+    <div class="node" onclick="changeSetting('evergreen', this)">1980</div>
+    <div class="node" onclick="changeSetting('tokyo', this)">2005</div>
     <div class="node" onclick="changeSetting('space', this)">2300</div>
   </section>
 
 <script>
 const settings = {
+
+carpathian: {
+  theme: "theme-carpathian",
+  title: "1650 Carpathian Woods",
+  tagline: "The forest watches. And remembers.",
+  image: "1650carpathian.png",
+
+  mapImage: "1650map.png",
+  mapLabel: "Velinor Vale",
+
+  section1Title: "Life at the Edge",
+  section2Title: "Old Bloodlines",
+  section3Title: "The Encroaching Dark",
+
+  box1: "Villages cling to survival beneath endless trees.",
+  box2: "Ancient families guard secrets older than kingdoms.",
+  box3: "Something in the woods does not sleep.",
+
+systems: {
+  vampire: {
+    section1Title: "Old Bloodlines",
+    section2Title: "The Castle Above",
+    section3Title: "Hunger in the Woods",
+    box1: "Ancient families rule through blood, debt and fear.",
+    box2: "The lord’s castle is not merely political power. It is a predator’s den.",
+    box3: "Villagers know not to travel after dusk."
+  },
+
+  werewolf: {
+    section1Title: "Sacred Territory",
+    section2Title: "The Old Forest",
+    section3Title: "War Rage",
+    box1: "The woods are alive, wounded and watching.",
+    box2: "Spirits move between trees, stones and old burial paths.",
+    box3: "The war against corruption is already here."
+  },
+
+  mage: {
+    section1Title: "Folk Magic",
+    section2Title: "Forbidden Rites",
+    section3Title: "Reality and Faith",
+    box1: "Charms, prayers and curses shape daily survival.",
+    box2: "Some rituals are older than the Church.",
+    box3: "Belief is strong here, and reality bends around it."
+  },
+
+  changeling: {
+    section1Title: "Old Tales",
+    section2Title: "Forest Glamour",
+    section3Title: "Winter Fear",
+    box1: "Every village child knows stories that are not only stories.",
+    box2: "Glamour hides in songs, masks, dances and moonlit paths.",
+    box3: "Fear and hunger make dreams brittle."
+  },
+
+  hunter: {
+    section1Title: "The Vigil",
+    section2Title: "Signs of Monsters",
+    section3Title: "Fire and Iron",
+    box1: "People whisper of things taken by the forest.",
+    box2: "Tracks, blood and old warnings point toward the impossible.",
+    box3: "Faith, fire and iron are all some hunters have."
+  },
+
+  wraith: {
+    section1Title: "Restless Dead",
+    section2Title: "Old Graves",
+    section3Title: "The Shadowed Road",
+    box1: "The dead remain close to home, family and unfinished grief.",
+    box2: "Graves are marked, forgotten or deliberately hidden.",
+    box3: "The road through the trees is crowded with the unseen."
+  },
+
+  promethean: {
+    section1Title: "The Created Monster",
+    section2Title: "Village Rejection",
+    section3Title: "Lonely Fire",
+    box1: "A thing made from death walks beneath the pines.",
+    box2: "The village fears what it cannot name.",
+    box3: "The Created seeks humanity in a world of superstition."
+  },
+
+  coc: {
+    section1Title: "Ancient Things",
+    section2Title: "Forbidden Woods",
+    section3Title: "Human Smallness",
+    box1: "The forest may be older than history remembers.",
+    box2: "Old stones and strange rites hint at something vast below belief.",
+    box3: "Human fear is reasonable here."
+  },
+
+  kob: {
+    section1Title: "Village Children",
+    section2Title: "The Forbidden Path",
+    section3Title: "Secrets Together",
+    box1: "Children hear more than adults think.",
+    box2: "There is a path everyone says not to take.",
+    box3: "Friendship is the only lantern in the dark."
+  },
+
+  ghosthunter: {
+    section1Title: "Haunted Places",
+    section2Title: "Local Testimony",
+    section3Title: "Proof in the Dark",
+    box1: "The chapel, well and forest edge all carry reports.",
+    box2: "Every villager has a story, though few tell it twice.",
+    box3: "The evidence may not survive sunrise."
+  }
+},
+
+
+  locations: [
+    "The Black Forest",
+    "Abandoned Chapel",
+    "Hunter’s Path",
+    "The Old Well"
+  ]
+},
+
   estonia: {
-    theme: "theme-estonia",
-    title: "1950s Estonia",
-    tagline: "Old songs, whispered softer each year.",
-    image: "1950estonia.avif",
-    mapImage: "1950map.png",
-    mapLabel: "Varjuküla",
+  theme: "theme-estonia",
+  title: "1950s Estonia",
+  tagline: "Old songs, whispered softer each year.",
+  image: "1950estonia.avif",
+  mapImage: "1950map.png",
+  mapLabel: "Varjuküla",
 
-    section1Title: "Life Beneath the Surface",
-    section2Title: "Echoes of the Old Ways",
-    section3Title: "The Weight of Silence",
-
-    box1: "Quiet routines. Watchful eyes...",
-    box2: "Old songs, rituals...",
-    box3: "Fear, control...",
-
-    locations: ["Forest Edge","River","Old House"]
+  systems: {
+    changeling: {
+      section1Title: "Life Beneath the Surface",
+      section2Title: "Echoes of the Old Ways",
+      section3Title: "The Weight of Silence",
+      box1: "Quiet routines. Watchful eyes...",
+      box2: "Old songs, rituals...",
+      box3: "Fear, control..."
+    },
+    vampire: {
+      section1Title: "Life Among Mortals",
+      section2Title: "The Masquerade",
+      section3Title: "Predators in the Dark",
+      box1: "People live quietly, unaware of the predators moving through authority, family and fear.",
+      box2: "The Masquerade is maintained through silence, suspicion and careful control.",
+      box3: "Hunger hides behind respectable faces."
+    },
+    mage: {
+      section1Title: "Reality Under Pressure",
+      section2Title: "Old Magic",
+      section3Title: "Control",
+      box1: "Reality feels narrow here, shaped by fear, routine and official truth.",
+      box2: "Old songs, names and rituals still bend the world in small ways.",
+      box3: "Control is not only political. It is metaphysical."
+    },
+    werewolf: {
+      section1Title: "Territory and Blood",
+      section2Title: "The Spirit World",
+      section3Title: "Rage",
+      box1: "The land remembers every wound inflicted upon it.",
+      box2: "Spirits linger near forests and forgotten places.",
+      box3: "Rage simmers beneath control, waiting to break."
+    },
+    hunter: {
+      section1Title: "Ordinary Lives",
+      section2Title: "Signs of the Unnatural",
+      section3Title: "The Hunt",
+      box1: "People begin to notice patterns others ignore.",
+      box2: "Strange events repeat in whispers and shadows.",
+      box3: "Once you see it, you cannot stop hunting it."
+    },
+    wraith: {
+      section1Title: "Echoes of the Dead",
+      section2Title: "Unfinished Business",
+      section3Title: "The Shadow",
+      box1: "The dead linger where memories refuse to fade.",
+      box2: "Regret binds souls to places and people.",
+      box3: "Your own shadow is your greatest enemy."
+    },
+    promethean: {
+      section1Title: "Outsiders",
+      section2Title: "The Created",
+      section3Title: "Isolation",
+      box1: "You are not meant to exist, yet you do.",
+      box2: "Humanity rejects what it does not understand.",
+      box3: "Loneliness follows wherever you go."
+    },
+    coc: {
+      section1Title: "Cosmic Indifference",
+      section2Title: "Forbidden Knowledge",
+      section3Title: "Madness",
+      box1: "The world is small compared to what lies beyond.",
+      box2: "Knowledge is dangerous and never free.",
+      box3: "Understanding the truth comes at a cost."
+    },
+    kob: {
+      section1Title: "Small Town Life",
+      section2Title: "Strange Events",
+      section3Title: "Friendship",
+      box1: "Kids sense things adults refuse to see.",
+      box2: "Something weird is happening beneath the surface.",
+      box3: "Only together can you face it."
+    },
+    ghosthunter: {
+      section1Title: "Paranormal Activity",
+      section2Title: "Investigation",
+      section3Title: "Evidence",
+      box1: "Something is definitely here.",
+      box2: "You track signs others dismiss.",
+      box3: "Proof is everything, even if it scares you."
+    }
   },
 
-    berlin: {
-      theme: "theme-berlin",
-      title: "1850s Berlin",
-      tagline: "Revolution under gaslight.",
-      image: "1850berlin.jpg",
+  locations: ["Forest Edge", "River", "Old House"]
+},
 
-      mapImage: "1850map.png",
-      mapLabel: "Berlin (Industrial Districts)",
+berlin: {
+  theme: "theme-berlin",
+  title: "1850s Berlin",
+  tagline: "Revolution under gaslight.",
+  image: "1850berlin.jpg",
 
-      section1Title: "Life in the Machine",
-      section2Title: "Power Structures",
-      section3Title: "Crushing Order",
+  mapImage: "1850map.png",
+  mapLabel: "Berlin (Industrial Districts)",
 
-      box1: "Crowded streets.",
-      box2: "Power structures.",
-      box3: "Industry dominates.",
+  systems: {
+    vampire: {
+      section1Title: "Blood in the Factories",
+      section2Title: "Industrial Influence",
+      section3Title: "The Masquerade of Progress",
+      box1: "Kindred feed from overcrowded districts, salons and political unrest.",
+      box2: "Factories, banks and old families become tools of control.",
+      box3: "Progress hides predation behind smoke and steel."
+    },
 
-      locations: ["Factory District","Workers’ Quarter","Underground Tunnels"]
+    werewolf: {
+      section1Title: "Wounded Earth",
+      section2Title: "Smoke and Iron",
+      section3Title: "Rage Against Industry",
+      box1: "The city grows like a wound across the land.",
+      box2: "Spirits of coal, smoke and machinery crowd the Umbra.",
+      box3: "Every factory chimney feels like an insult."
+    },
+
+    mage: {
+      section1Title: "Reason and Revolution",
+      section2Title: "The Machine Age",
+      section3Title: "Paradigm War",
+      box1: "Ideas move faster than horses now: science, politics and occult theory.",
+      box2: "Machines reshape what people believe is possible.",
+      box3: "Reality is contested in lecture halls, workshops and secret societies."
+    },
+
+    changeling: {
+      section1Title: "Dreams Under Gaslight",
+      section2Title: "Glamour in Revolution",
+      section3Title: "Banality of Industry",
+      box1: "Dreams survive in theaters, street songs and radical pamphlets.",
+      box2: "Hope and rebellion burn bright enough to call the fae.",
+      box3: "Factories grind wonder into routine."
+    },
+
+    hunter: {
+      section1Title: "Human Suspicion",
+      section2Title: "Monsters in the Crowd",
+      section3Title: "The Hunt in Smoke",
+      box1: "The city is too crowded for secrets, yet full of them.",
+      box2: "Missing workers, strange patrons and night-shift deaths form a pattern.",
+      box3: "Hunters follow blood trails through alleys and factories."
+    },
+
+    wraith: {
+      section1Title: "The Restless Poor",
+      section2Title: "Deaths of Industry",
+      section3Title: "Ghosts in the Walls",
+      box1: "Tenements and workhouses are crowded with unfinished grief.",
+      box2: "Factory accidents, disease and hunger leave many dead before their time.",
+      box3: "The walls remember screams no one reported."
+    },
+
+    promethean: {
+      section1Title: "Made by Science",
+      section2Title: "The Created in the City",
+      section3Title: "Rejected by Progress",
+      box1: "In an age of anatomy, electricity and invention, a Created could be mistaken for progress.",
+      box2: "Crowds offer camouflage, but never belonging.",
+      box3: "The city praises creation while fearing the thing created."
+    },
+
+    coc: {
+      section1Title: "Forbidden Knowledge",
+      section2Title: "Occult Societies",
+      section3Title: "The Machinery Beneath",
+      box1: "Scholars, industrialists and mystics search for truths best left buried.",
+      box2: "Private salons and back rooms trade fragments of impossible lore.",
+      box3: "Something ancient turns beneath the gears of modernity."
+    },
+
+    kob: {
+      section1Title: "Street Children",
+      section2Title: "Strange Machines",
+      section3Title: "Secrets in the City",
+      box1: "Children know the alleys, rooftops and factory yards better than adults.",
+      box2: "A machine is making sounds no one else hears.",
+      box3: "The city is frightening, but friends make it navigable."
+    },
+
+    ghosthunter: {
+      section1Title: "Industrial Hauntings",
+      section2Title: "Reports and Rumors",
+      section3Title: "Evidence in the Smoke",
+      box1: "Factories, boarding houses and tunnels collect hauntings quickly.",
+      box2: "Workers report voices, cold rooms and figures in soot-stained windows.",
+      box3: "Every investigation risks becoming another urban legend."
+    }
   },
 
-newengland: {
-  theme: "theme-newengland",
-  title: "1980s New England",
+  locations: ["Factory District", "Workers’ Quarter", "Underground Tunnels"]
+},
+
+evergreen: {
+  theme: "theme-evergreen",
+  title: "1980s Evergreen",
   tagline: "Small town secrets.",
   image: "1980evergreenHaven.png",
 
   mapImage: "1980map.png",
   mapLabel: "Evergreen Haven",
 
-  section1Title: "Small Town Life",
-  section2Title: "Strange Happenings",
-  section3Title: "Things Unspoken",
+  systems: {
+  vampire: {
+    section1Title: "Blood in a Small Town",
+    section2Title: "Old Families",
+    section3Title: "Secrets After Dark",
+    box1: "In Evergreen, everyone knows everyone — which makes feeding dangerous.",
+    box2: "Certain families have controlled the town for generations.",
+    box3: "After sunset, the quiet streets belong to something older than gossip."
+  },
 
-  box1: "Everyone knows.",
-  box2: "Something listens.",
-  box3: "Ignored truths.",
+  werewolf: {
+    section1Title: "The Woods Are Watching",
+    section2Title: "Sacred Ground",
+    section3Title: "Rage Beneath the Pines",
+    box1: "The forest around Evergreen is alive, wounded and territorial.",
+    box2: "Old trails, burial grounds and hidden clearings still hold power.",
+    box3: "Something corrupt is spreading through the roots."
+  },
+
+  mage: {
+    section1Title: "Reality Feels Thin",
+    section2Title: "Hidden Patterns",
+    section3Title: "The Town’s Secret Logic",
+    box1: "Coincidences happen too often here to be accidents.",
+    box2: "Symbols repeat in schoolbooks, road signs and old local records.",
+    box3: "Evergreen follows rules no one has written down."
+  },
+
+  changeling: {
+    section1Title: "Childhood Wonder",
+    section2Title: "Dreams in the Woods",
+    section3Title: "Growing Up Hurts",
+    box1: "Evergreen still remembers what adults have forgotten.",
+    box2: "Glamour hides in forts, bikes, treehouses and summer nights.",
+    box3: "Banality arrives as fear, conformity and leaving childhood behind."
+  },
+
+  hunter: {
+    section1Title: "Ordinary People Notice",
+    section2Title: "Missing Persons",
+    section3Title: "The First Hunt",
+    box1: "A teacher, deputy, parent or teenager finally sees the pattern.",
+    box2: "People disappear, return changed, or are quietly forgotten.",
+    box3: "Once the truth is seen, normal life is over."
+  },
+
+  wraith: {
+    section1Title: "The Dead Stay Close",
+    section2Title: "Unfinished Grief",
+    section3Title: "Haunted Homes",
+    box1: "Evergreen’s dead linger in bedrooms, basements and roadside memorials.",
+    box2: "Old tragedies are treated like town history, not open wounds.",
+    box3: "Some houses remember every family that suffered inside them."
+  },
+
+  promethean: {
+    section1Title: "The Outsider Arrives",
+    section2Title: "Almost Human",
+    section3Title: "No Place to Belong",
+    box1: "A stranger in Evergreen is noticed immediately.",
+    box2: "The Created tries to understand kindness, family and small-town rituals.",
+    box3: "The town rejects what feels wrong, even when it looks human."
+  },
+
+  coc: {
+    section1Title: "The Thing Beneath Town",
+    section2Title: "Local History Lies",
+    section3Title: "Sanity in Evergreen",
+    box1: "The town was built over something no map records.",
+    box2: "Archives, church ledgers and missing files contradict each other.",
+    box3: "The truth is not supernatural. It is worse."
+  },
+
+  kob: {
+    section1Title: "Kids on Bikes",
+    section2Title: "The Summer Mystery",
+    section3Title: "Friends Against the Dark",
+    box1: "The kids know the woods, drainage tunnels and abandoned places best.",
+    box2: "Something strange began when the power went out last summer.",
+    box3: "Adults will not believe them, so they have to solve it themselves."
+  },
+
+  ghosthunter: {
+    section1Title: "Evergreen Hauntings",
+    section2Title: "Cold Spots and Recordings",
+    section3Title: "The Case File",
+    box1: "Reports cluster around the school, old mill and houses near the woods.",
+    box2: "Audio captures whispers that answer questions no one asked aloud.",
+    box3: "Every investigation points back to one forgotten night."
+  }
+},
 
   locations: ["School","Woods","Main Street"]
 
@@ -181,14 +571,97 @@ newengland: {
     mapImage: "1920map.png",
     mapLabel: "Praha",
 
-    section1Title: "A City of Secrets",
-    section2Title: "Occult Undercurrents",
-    section3Title: "Decay Behind Beauty",
+systems: {
+  vampire: {
+    section1Title: "Old Blood in Old Stone",
+    section2Title: "Hidden Courts",
+    section3Title: "Predators in Decay",
+    box1: "Ancient Kindred hide in noble houses and forgotten districts.",
+    box2: "Power moves through salons, secrets and lineage.",
+    box3: "The city decays slowly — and feeds them well."
+  },
 
-    box1: "Artists & secrets.",
-    box2: "Occult knowledge.",
-    box3: "Hidden decay.",
+  werewolf: {
+    section1Title: "Sacred Ruins",
+    section2Title: "Restless Spirits",
+    section3Title: "War Beneath the City",
+    box1: "The land beneath Prague remembers older things.",
+    box2: "Spirits cling to churches, bridges and burial grounds.",
+    box3: "The war is hidden beneath beauty."
+  },
 
+  mage: {
+    section1Title: "Occult Capital",
+    section2Title: "Hidden Orders",
+    section3Title: "Reality and Ritual",
+    box1: "Prague is thick with magical history and competing traditions.",
+    box2: "Secret societies guard dangerous knowledge.",
+    box3: "Reality bends easily where belief is layered."
+  },
+
+  changeling: {
+    section1Title: "Dreams in Decay",
+    section2Title: "Fading Glamour",
+    section3Title: "Melancholy Wonder",
+    box1: "The city is beautiful, but worn and heavy with memory.",
+    box2: "Glamour lingers in art, music and old stories.",
+    box3: "Banality creeps in through loss and stagnation."
+  },
+
+  hunter: {
+    section1Title: "Strange Patterns",
+    section2Title: "Occult Activity",
+    section3Title: "The Quiet Hunt",
+    box1: "Disappearances and rituals leave subtle traces.",
+    box2: "Symbols, gatherings and whispers hint at something hidden.",
+    box3: "Hunters move carefully — the city is watching back."
+  },
+
+  wraith: {
+    section1Title: "City of the Dead",
+    section2Title: "Unfinished Lives",
+    section3Title: "Haunted Streets",
+    box1: "Generations of death linger in Prague’s stones.",
+    box2: "Ghosts cling to memory, regret and unfinished stories.",
+    box3: "The city is crowded with the unseen."
+  },
+
+  promethean: {
+    section1Title: "The Outsider",
+    section2Title: "Alchemy and Creation",
+    section3Title: "Rejected Humanity",
+    box1: "Legends of creation echo through Prague’s past.",
+    box2: "A Created being might be mistaken for myth — or feared worse.",
+    box3: "Humanity feels distant in a city of old ghosts."
+  },
+
+  coc: {
+    section1Title: "Forbidden Knowledge",
+    section2Title: "Ancient Rituals",
+    section3Title: "Cosmic Horror",
+    box1: "Libraries and archives hold dangerous truths.",
+    box2: "Old rituals persist beneath modern life.",
+    box3: "The universe is colder than the city already feels."
+  },
+
+  kob: {
+    section1Title: "City Adventures",
+    section2Title: "Hidden Mysteries",
+    section3Title: "Friends Against Fear",
+    box1: "Kids explore alleys, tunnels and abandoned places.",
+    box2: "Something strange connects the city’s secrets.",
+    box3: "Friendship is the only safe place."
+  },
+
+  ghosthunter: {
+    section1Title: "Haunted Prague",
+    section2Title: "Documented Phenomena",
+    section3Title: "Evidence in the Old City",
+    box1: "Castles, bridges and streets show constant activity.",
+    box2: "Records go back decades — maybe centuries.",
+    box3: "Some cases should never have been reopened."
+  }
+},
     locations: ["Old Town Square","Charles Bridge"]
   },
 
@@ -201,16 +674,222 @@ newengland: {
     mapImage: "1890map.png",
     mapLabel: "raven`s point",
 
-    section1Title: "Life by the Sea",
-    section2Title: "Whispers from the Deep",
-    section3Title: "Salt and Silence",
+systems: {
+  vampire: {
+    section1Title: "Blood by the Harbor",
+    section2Title: "Old Families",
+    section3Title: "Fog and Hunger",
+    box1: "The docks give predators cover, movement and easy disappearances.",
+    box2: "Old coastal families know more than they admit.",
+    box3: "The fog hides feeding, deals and bodies."
+  },
 
-    box1: "Isolation.",
-    box2: "Ocean power.",
-    box3: "Secrets in waves.",
+  werewolf: {
+    section1Title: "Salt Territory",
+    section2Title: "Sea Spirits",
+    section3Title: "Polluted Waters",
+    box1: "The coast is sacred, dangerous and wounded.",
+    box2: "Spirits speak through storms, gulls, tides and bones.",
+    box3: "Something foul gathers beneath the waves."
+  },
 
+  mage: {
+    section1Title: "Tidal Magic",
+    section2Title: "Lighthouse Rites",
+    section3Title: "The Pull Below",
+    box1: "Magic follows tide, moon and storm.",
+    box2: "The lighthouse is more than a warning beacon.",
+    box3: "The sea pulls at memory, dreams and reality."
+  },
+
+  changeling: {
+    section1Title: "Sea Stories",
+    section2Title: "Glamour of the Deep",
+    section3Title: "Drowned Dreams",
+    box1: "Children and sailors trade tales that shimmer with truth.",
+    box2: "Glamour rises in songs, storms and impossible lights.",
+    box3: "The sea keeps every dream it takes."
+  },
+
+  hunter: {
+    section1Title: "Disappearances",
+    section2Title: "Things Ashore",
+    section3Title: "The Night Watch",
+    box1: "People vanish near the cliffs, harbor and lighthouse.",
+    box2: "Strange things wash ashore after storms.",
+    box3: "Hunters keep watch when the fog comes in."
+  },
+
+  wraith: {
+    section1Title: "Drowned Dead",
+    section2Title: "Shipwreck Memory",
+    section3Title: "Calls from the Water",
+    box1: "The drowned do not always stay below.",
+    box2: "Old wrecks hold grief like anchors.",
+    box3: "Voices call from the surf at night."
+  },
+
+  promethean: {
+    section1Title: "Cast Ashore",
+    section2Title: "Made from Ruin",
+    section3Title: "No Safe Harbor",
+    box1: "A Created arrives like wreckage from another life.",
+    box2: "The body remembers storm, salt and stolen fire.",
+    box3: "Every harbor becomes hostile eventually."
+  },
+
+  coc: {
+    section1Title: "Deep Ones",
+    section2Title: "Old Cults",
+    section3Title: "The Sea Below",
+    box1: "The ocean is not empty, and it has been watching.",
+    box2: "Some families pray to older things than God.",
+    box3: "The truth waits below the tide line."
+  },
+
+  kob: {
+    section1Title: "Summer Secrets",
+    section2Title: "The Lighthouse",
+    section3Title: "Friends Against the Fog",
+    box1: "Kids notice the town changes when tourists leave.",
+    box2: "The lighthouse flashes in patterns no adult admits seeing.",
+    box3: "The mystery is too big to face alone."
+  },
+
+  ghosthunter: {
+    section1Title: "Haunted Coast",
+    section2Title: "EVPs in the Fog",
+    section3Title: "The Lighthouse Case",
+    box1: "The harbor, cliffs and lighthouse all show activity.",
+    box2: "Recordings catch voices beneath the sound of waves.",
+    box3: "The case points back to a wreck no one wants remembered."
+  }
+},
     locations: ["Harbor","Cliffs","Lighthouse"]
   },
+
+tokyo: {
+  theme: "theme-tokyo",
+  title: "2005 Tokyo",
+  tagline: "She is still watching.",
+  image: "2005tokyo.png",
+
+  mapImage: "2005map.png",
+  mapLabel: "Shinjuku District",
+
+systems: {
+  vampire: {
+    section1Title: "Hidden Among Millions",
+    section2Title: "Corporate Control",
+    section3Title: "Silent Predators",
+    box1: "In a city this large, feeding is easy — and invisible.",
+    box2: "Corporations, nightlife and media are tools of control.",
+    box3: "Predators walk beside you, unnoticed."
+  },
+
+  werewolf: {
+    section1Title: "Urban Spirits",
+    section2Title: "Digital Noise",
+    section3Title: "Rage in Concrete",
+    box1: "The spirit world is crowded with neon, signals and chaos.",
+    box2: "Technology has birthed new, unstable spirits.",
+    box3: "The city suffocates the natural world."
+  },
+
+  mage: {
+    section1Title: "Reality as Code",
+    section2Title: "Technomagic",
+    section3Title: "Hidden Layers",
+    box1: "Reality feels programmable, layered and unstable.",
+    box2: "Magic hides inside systems, data and networks.",
+    box3: "Something moves behind the interface."
+  },
+
+  changeling: {
+    section1Title: "Urban Dreams",
+    section2Title: "Lost Wonder",
+    section3Title: "Neon Glamour",
+    box1: "Dreams survive in arcades, art and subculture.",
+    box2: "Modern life crushes imagination quickly.",
+    box3: "Glamour flickers in artificial light."
+  },
+
+  hunter: {
+    section1Title: "Urban Legends",
+    section2Title: "Digital Evidence",
+    section3Title: "The Hunt Online",
+    box1: "Strange videos, rumors and disappearances spread fast.",
+    box2: "Proof exists — but is buried under noise.",
+    box3: "Hunters track patterns through data and streets."
+  },
+
+  wraith: {
+    section1Title: "Lingering Spirits",
+    section2Title: "Digital Ghosts",
+    section3Title: "Echoes in Signals",
+    box1: "Ghosts attach to places, people and technology.",
+    box2: "Some spirits move through screens and recordings.",
+    box3: "Not everything in the signal is alive."
+  },
+
+  promethean: {
+    section1Title: "Artificial Life",
+    section2Title: "Isolation in Crowds",
+    section3Title: "Seeking Humanity",
+    box1: "You are surrounded by people, yet completely alone.",
+    box2: "Technology blurs the line between human and created.",
+    box3: "Humanity feels closer — and further away."
+  },
+
+  coc: {
+    section1Title: "Modern Horror",
+    section2Title: "Hidden Cults",
+    section3Title: "Something Watching",
+    box1: "The old horrors never left — they adapted.",
+    box2: "Cults hide in corporations, forums and networks.",
+    box3: "Something is watching through the noise."
+  },
+
+  kob: {
+    section1Title: "City Kids",
+    section2Title: "Weird Signals",
+    section3Title: "Friends vs Fear",
+    box1: "Kids notice patterns adults dismiss.",
+    box2: "Phones, games and signals behave strangely.",
+    box3: "Only together can they face it."
+  },
+
+  ghosthunter: {
+    section1Title: "Paranormal Tech",
+    section2Title: "Captured Evidence",
+    section3Title: "Urban Hauntings",
+    box1: "Ghost activity shows up in recordings and devices.",
+    box2: "Investigations rely on digital tools.",
+    box3: "The city is full of unseen presences."
+  }
+},
+
+  locations: [
+    "Apartment Complex",
+    "Subway Platform",
+    "Internet Café",
+    "Abandoned School"
+  ],
+
+  //  JAPANSK CURSE
+  jp: {
+    title: "2005年 東京",
+    tagline: "まだ見ている",
+
+    section1Title: "孤独な都市",
+    section2Title: "残る霊",
+    section3Title: "沈黙の技術",
+
+    box1: "人は多いが、誰も見ていない。",
+    box2: "霊は場所と記憶に残る。",
+    box3: "何かが信号の中を動いている。"
+  }
+},
 
 space: {
   theme: "theme-space",
@@ -221,13 +900,97 @@ space: {
   mapImage: "2300map.png",
   mapLabel: "Station Erebos",
 
-  section1Title: "Life in Isolation",
-  section2Title: "Systems and Control",
-  section3Title: "Unknown Signals",
+  systems: {
+  vampire: {
+    section1Title: "Feeding in the Void",
+    section2Title: "Closed Systems",
+    section3Title: "Predators in Isolation",
+    box1: "In space, every human is a limited resource.",
+    box2: "Stations are controlled environments — perfect for quiet hunting.",
+    box3: "There is nowhere to run, nowhere to hide."
+  },
 
-  box1: "Isolation.",
-  box2: "Technology rules.",
-  box3: "Unknown presence.",
+  werewolf: {
+    section1Title: "Dead Territory",
+    section2Title: "Silent Spirits",
+    section3Title: "Rage in the Vacuum",
+    box1: "Space is not alive — and that absence is wrong.",
+    box2: "Strange, alien spirits drift through machines and signals.",
+    box3: "The lack of Gaia creates a constant, simmering rage."
+  },
+
+  mage: {
+    section1Title: "Reality Without Limits",
+    section2Title: "The Void Between",
+    section3Title: "Control of Existence",
+    box1: "Reality behaves differently far from Earth.",
+    box2: "The void is a place of raw potential and dangerous instability.",
+    box3: "Here, belief may shape existence more than ever."
+  },
+
+  changeling: {
+    section1Title: "Dreams in Cold Space",
+    section2Title: "Lost Wonder",
+    section3Title: "Banality of Isolation",
+    box1: "The stars once inspired wonder — now they feel distant.",
+    box2: "Glamour struggles to survive in sterile environments.",
+    box3: "Isolation and routine crush imagination quickly."
+  },
+
+  hunter: {
+    section1Title: "Something on Board",
+    section2Title: "Crew Disappearances",
+    section3Title: "Nowhere to Escape",
+    box1: "When something goes wrong in space, it spreads fast.",
+    box2: "Crew logs don’t match reality.",
+    box3: "The hunt becomes survival."
+  },
+
+  wraith: {
+    section1Title: "The Lost Dead",
+    section2Title: "Echoes in Metal",
+    section3Title: "Cold Afterlife",
+    box1: "Those who die in space don’t always leave.",
+    box2: "Ships remember voices, footsteps and last moments.",
+    box3: "The void does not comfort the dead."
+  },
+
+  promethean: {
+    section1Title: "Constructed Life",
+    section2Title: "Artificial Humanity",
+    section3Title: "No Origin",
+    box1: "In space, being artificial is almost normal.",
+    box2: "The line between human and created is blurred.",
+    box3: "But the question remains: what is a soul out here?"
+  },
+
+  coc: {
+    section1Title: "Cosmic Horror",
+    section2Title: "The Infinite Void",
+    section3Title: "Insignificance",
+    box1: "Space is vast beyond comprehension.",
+    box2: "Something exists out there — and it notices.",
+    box3: "Humanity is very, very small."
+  },
+
+  kob: {
+    section1Title: "Young Crew",
+    section2Title: "Strange Signals",
+    section3Title: "Friends in the Dark",
+    box1: "Kids grow up on stations, learning corridors and vents.",
+    box2: "A signal no one else hears is repeating.",
+    box3: "Only they take it seriously."
+  },
+
+  ghosthunter: {
+    section1Title: "Haunted Stations",
+    section2Title: "Recorded Evidence",
+    section3Title: "Something Still There",
+    box1: "Old ships and abandoned stations show activity.",
+    box2: "Recordings capture voices from empty rooms.",
+    box3: "Some places should stay abandoned."
+  }
+},
 
   locations: ["Command Deck","Crew Quarters","Maintenance Tunnels"]
 }
@@ -253,13 +1016,17 @@ const locations = document.getElementById("locations");
 
 const mapimg = document.getElementById("mapimg");
 const maplabel = document.getElementById("maplabel");
+let currentSetting = "estonia";
+let currentSystem = "changeling";
+
 
 /* ===== CHANGE SETTING ===== */
 function changeSetting(setting) {
 
   const data = settings[setting];
   if (!data) return;
-
+currentSetting = setting;
+currentSystem = "changeling";
   body.classList.add("fade-out");
 
   setTimeout(() => {
@@ -278,13 +1045,18 @@ function changeSetting(setting) {
     title.innerText = data.title;
     tagline.innerText = data.tagline;
 
-    section1.innerText = data.section1Title;
-    section2.innerText = data.section2Title;
-    section3.innerText = data.section3Title;
+applySystem();
 
-    box1.innerText = data.box1;
-    box2.innerText = data.box2;
-    box3.innerText = data.box3;
+    // reset system til default
+currentSystem = "changeling";
+
+// fjern active fra alle system-knapper
+document.querySelectorAll(".system-selector button")
+  .forEach(btn => btn.classList.remove("active"));
+
+// sett active på changeling
+const defaultBtn = document.querySelector('[data-system="changeling"]');
+if (defaultBtn) defaultBtn.classList.add("active");
 
     /* locations */
     locations.innerHTML = data.locations
@@ -332,7 +1104,10 @@ function closeMap() {
 }
 
 /* ===== INIT ===== */
-window.onload = () => changeSetting("estonia");
+window.onload = () => {
+  changeSetting("estonia");
+  startLanguageCurse();
+};
 
 function openPDF(file) {
   const viewer = document.getElementById("pdfViewer");
@@ -345,6 +1120,115 @@ function openPDF(file) {
 function closePDF() {
   document.getElementById("pdfViewer").style.display = "none";
 }
+
+function startLanguageCurse(){
+
+  function trigger(){
+    const delay = Math.random() * 20000 + 8000;
+
+    setTimeout(() => {
+
+      // kun Tokyo
+      if(!body.classList.contains("theme-tokyo")){
+        trigger();
+        return;
+      }
+
+      const data = settings.tokyo;
+      const jp = data.jp;
+      if(!jp){
+        trigger();
+        return;
+      }
+
+      // lagre original
+      const original = {
+        title: title.innerText,
+        tagline: tagline.innerText,
+        s1: section1.innerText,
+        s2: section2.innerText,
+        s3: section3.innerText,
+        b1: box1.innerText,
+        b2: box2.innerText,
+        b3: box3.innerText
+      };
+
+      // bytt til japansk
+      title.innerText = jp.title;
+      tagline.innerText = jp.tagline;
+
+      section1.innerText = jp.section1Title;
+      section2.innerText = jp.section2Title;
+      section3.innerText = jp.section3Title;
+
+      box1.innerText = jp.box1;
+      box2.innerText = jp.box2;
+      box3.innerText = jp.box3;
+
+      body.classList.add("cursed");
+
+      // tilbake
+      setTimeout(() => {
+
+        title.innerText = original.title;
+        tagline.innerText = original.tagline;
+
+        section1.innerText = original.s1;
+        section2.innerText = original.s2;
+        section3.innerText = original.s3;
+
+        box1.innerText = original.b1;
+        box2.innerText = original.b2;
+        box3.innerText = original.b3;
+
+        body.classList.remove("cursed");
+
+        trigger();
+
+      }, 1200); // hvor lenge glitch varer
+
+    }, delay);
+  }
+
+  trigger();
+}
+
+
+
+function changeSystem(system, element) {
+
+  currentSystem = system;
+
+  // fjern active fra alle knapper
+  document.querySelectorAll(".system-selector button")
+    .forEach(btn => btn.classList.remove("active"));
+
+  // sett active på valgt
+  element.classList.add("active");
+
+  // 🔥 senere: her skal vi oppdatere content
+  console.log("System valgt:", system);
+  applySystem();
+}
+
+function applySystem() {
+  const data = settings[currentSetting];
+
+  if (!data || !data.systems) return;
+
+  const sys = data.systems[currentSystem];
+
+  if (!sys) return;
+
+  section1.innerText = sys.section1Title;
+  section2.innerText = sys.section2Title;
+  section3.innerText = sys.section3Title;
+
+  box1.innerText = sys.box1;
+  box2.innerText = sys.box2;
+  box3.innerText = sys.box3;
+}
+
 
 </script>
 </body>

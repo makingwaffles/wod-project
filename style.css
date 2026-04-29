@@ -1,7 +1,7 @@
 /* ===== BASE ===== */
 body {
   margin-left: 220px;
-  font-family: 'Inter', sans-serif;
+  font-family: var(--body-font, 'Inter', sans-serif);
 
   /* 🔥 fallback hvis theme ikke er satt */
   --bg: #0e1512;
@@ -56,26 +56,57 @@ h1, h2 {
 }
 
 .menu-item {
+  position: relative;
   padding: 10px;
   cursor: pointer;
-  opacity: 0.6;
-  transition: 0.3s;
+
+  opacity: 0.5;
+  letter-spacing: 0.5px;
+
+  transition: all 0.25s ease;
+
   border-left: 2px solid transparent;
-  transition: all 0.2s ease;
 }
 
 .menu-item:hover {
   opacity: 1;
   color: var(--accent);
-  transform: translateX(5px);
-  text-shadow: 0 0 6px var(--accent);
+
+  transform: translateX(4px);
+
+  text-shadow: 0 0 6px rgba(255,255,255,0.2);
+
+  animation: menuFlicker 1.8s infinite;
 }
 
-.menu-item.active {
-  opacity: 1;
-  color: var(--accent);
-  border-left: 2px solid var(--accent);
+.menu-item:hover::before {
+  opacity: 0.6;
+  transform: translateY(-50%) scale(1.2);
 }
+
+.menu-item.active::before {
+  opacity: 1;
+  transform: translateY(-50%) scale(1.5);
+}
+
+.menu-item::before {
+  content: "";
+  position: absolute;
+  left: -10px;
+  top: 50%;
+
+  width: 4px;
+  height: 4px;
+
+  background: var(--accent);
+  border-radius: 50%;
+
+  opacity: 0;
+  transform: translateY(-50%) scale(0.5);
+
+  transition: 0.3s;
+}
+
 
 /* Quick select */
 .quick {
@@ -171,6 +202,48 @@ h1, h2 {
   box-shadow: 0 0 15px var(--accent);
 }
 
+/* ===== SYSTEM SELECTOR ===== */
+.system-selector {
+  width: calc(100% - 220px);
+  margin-left: 220px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+
+  gap: 8px;
+  padding: 12px 20px;
+  box-sizing: border-box;
+}
+
+.system-group {
+  display: contents;
+}
+
+.system-group p {
+  display: none;
+}
+
+.system-selector button {
+  display: inline-block;
+  margin: 4px;
+  background: transparent;
+  border: 1px solid var(--accent);
+  color: var(--text);
+  padding: 6px 12px;
+  cursor: pointer;
+  opacity: 0.7;
+  transition: 0.2s;
+}
+
+.system-selector button:hover,
+.system-selector button.active {
+  opacity: 1;
+  background: var(--accent);
+  color: black;
+  box-shadow: 0 0 8px var(--accent);
+}
 /* ===== MAP + LOCATIONS ===== */
 .map, .locations {
   padding: 20px;
@@ -262,6 +335,120 @@ body::before {
 
 /* ===== THEMES ===== */
 
+/* TOKYO */
+.theme-tokyo {
+  --bg: #0a0a0d;
+  --accent: #9fd3ff;       /* kald blå */
+  --text: #e6f1ff;
+  --heading-font: 'IBM Plex Mono', monospace;
+  --body-font: 'Inter', sans-serif;
+}
+
+/* BOXES */
+.theme-tokyo .box,
+.theme-tokyo .map,
+.theme-tokyo .locations {
+  background: rgba(10,15,25,0.8);
+
+  border: 1px solid rgba(159,211,255,0.15);
+
+  box-shadow:
+    0 0 20px rgba(159,211,255,0.1),
+    inset 0 0 10px rgba(0,0,0,0.8);
+}
+
+/* HERO */
+.theme-tokyo .hero {
+  filter: brightness(1.1) contrast(1.1) saturate(0.8);
+}
+
+/* TEXT FEEL */
+.theme-tokyo h1 {
+  letter-spacing: 2px;
+  text-shadow: 0 0 10px rgba(159,211,255,0.3);
+}
+
+/* Carpathian */
+.theme-carpathian {
+  --bg: #060707;
+  --accent: #7a1f2b;        /* mørk blodrød */
+  --text: #e8e2dc;          /* blek, gammel papir */
+  --heading-font: 'UnifrakturCook', serif;
+}
+
+.theme-carpathian {
+  --bg: #060707;
+  --accent: #7a1f2b;
+  --text: #e8e2dc;
+
+  --heading-font: 'UnifrakturCook', serif;
+  --body-font: 'Cormorant Garamond', serif;
+}
+
+/* BOXES */
+.theme-carpathian .box,
+.theme-carpathian .map,
+.theme-carpathian .locations {
+  background: linear-gradient(
+    180deg,
+    rgba(15,10,10,0.8),
+    rgba(5,5,5,0.9)
+  );
+
+  border: 1px solid rgba(122,31,43,0.25);
+
+  box-shadow:
+    0 0 25px rgba(122,31,43,0.15),
+    inset 0 0 25px rgba(0,0,0,0.9);
+
+  border-radius: 4px;
+}
+
+.theme-carpathian h1 {
+  letter-spacing: 3px;
+  text-shadow:
+    0 0 10px rgba(122,31,43,0.5),
+    0 0 20px rgba(0,0,0,0.8);
+}
+
+/* HERO (mørkere + dramatisk) */
+.theme-carpathian .hero {
+  filter: brightness(0.9) contrast(1.1) saturate(0.85);
+
+  box-shadow:
+    inset 0 -120px 180px rgba(0,0,0,0.6),
+    inset 0 0 80px rgba(0,0,0,0.4);
+}
+
+/* HEADINGS */
+.theme-carpathian .hero {
+  filter: brightness(1.25) contrast(1.05) saturate(0.9);
+
+  box-shadow:
+    inset 0 -100px 150px rgba(0,0,0,0.5),
+    inset 0 0 60px rgba(0,0,0,0.3);
+}
+
+/* TIMELINE */
+.theme-carpathian .timeline {
+  background: rgba(10,5,5,0.95);
+  border-bottom: 1px solid rgba(122,31,43,0.2);
+}
+
+/* SIDEBAR */
+.theme-carpathian .sidebar {
+  background: rgba(5,0,0,0.95);
+  border-right: 1px solid rgba(122,31,43,0.15);
+}
+
+/* HOVER EFFECT (mer “alive”) */
+.theme-carpathian .box:hover {
+  transform: translateY(-6px) scale(1.01);
+  box-shadow:
+    0 0 30px rgba(122,31,43,0.25),
+    inset 0 0 20px rgba(0,0,0,0.8);
+}
+
 /* Estonia */
 .theme-estonia {
   --bg: #0e1512;
@@ -326,16 +513,16 @@ body::before {
 
 }
 /* New England */
-.theme-newengland {
+.theme-evergreen {
   --bg: #1c1a17;
   --accent: #b08d57;
   --text: #f3e9dc;
   --heading-font: 'Inter', sans-serif;
 }
 
-.theme-newengland .box,
-.theme-newengland .map,
-.theme-newengland .locations {
+.theme-evergreen .box,
+.theme-evergreen .map,
+.theme-evergreen .locations {
   background: rgba(50,40,30,0.5);
 }
 
@@ -359,6 +546,16 @@ body::before {
   pointer-events: none;
   z-index: 5;
   mix-blend-mode: screen;
+}
+
+/*Carpathian*/
+.theme-carpathian .ambient {
+  animation: drift 20s ease-in-out infinite;
+}
+
+@keyframes drift {
+  0%,100% { transform: translateX(0); }
+  50% { transform: translateX(-20px); }
 }
 
 /* Estonia glow */
@@ -493,4 +690,10 @@ body::before {
   inset: 0;
   background: rgba(0,0,0,0.5);
   z-index: -1;
+}
+
+/* ===== CURSE EFFECT ===== */
+body.cursed {
+  filter: contrast(1.3) brightness(0.8);
+  transform: scale(1.002);
 }
