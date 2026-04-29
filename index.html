@@ -36,12 +36,18 @@
 
     <div class="quick">
       <p>Quick Select</p>
+      <div class="quick-item" onclick="changeSetting('plague1400')">1400 Plague</div>
+      <div class="quick-item" onclick="changeSetting('amazon1520')">1520 Amazon</div>
       <div class="quick-item" onclick="changeSetting('carpathian', event)">1650 Carpathian Woods</div>
+      <div class="quick-item" onclick="changeSetting('salem')">1690 Salem</div>
       <div class="quick-item" onclick="changeSetting('berlin', event)">1850 Berlin</div>
+      <div class="quick-item" onclick="changeSetting('neworleans')">1880 New Orleans</div>
       <div class="quick-item" onclick="changeSetting('coastal', event)">1890 Coastal</div>
       <div class="quick-item" onclick="changeSetting('prague', event)">1920 Prague</div>
-      <div class="quick-item" onclick="changeSetting('evergreen', this)">1980 Evergreen</div>
+      <div class="quick-item" onclick="changeSetting('evergreen', event)">1980 Evergreen</div>
       <div class="quick-item" onclick="changeSetting('tokyo', event)">2005 Tokyo</div>
+      <div class="quick-item" onclick="changeSetting('hospital2010')">2010 Hospital</div>
+      <div class="quick-item" onclick="changeSetting('arcticblacksite')">2030 Arctic Black Site</div>
       <div class="quick-item" onclick="changeSetting('space', event)">2300 Space</div>
     </div>
 
@@ -133,20 +139,986 @@
     <button class="pdf-close" onclick="closePDF()">✕</button>
     <iframe id="pdfFrame"></iframe>
   </div>
+
   <!-- TIMELINE -->
-  <section class="timeline">
+  <div class="timeline-wrapper">
+  <div class="timeline-arrow left" onclick="scrollTimeline(-1)">‹</div>
+
+  <section class="timeline" id="timeline">
+    <div class="node" onclick="changeSetting('plague1400')">1400</div>
+    <div class="node" onclick="changeSetting('amazon1520')">1520</div>
     <div class="node" onclick="changeSetting('carpathian', this)">1650</div>
+    <div class="node" onclick="changeSetting('salem')">1690</div>
     <div class="node" onclick="changeSetting('berlin', this)">1850</div>
+    <div class="node" onclick="changeSetting('neworleans')">1880</div>
     <div class="node" onclick="changeSetting('coastal', this)">1890</div>
     <div class="node" onclick="changeSetting('prague', this)">1920</div>
     <div class="node active" onclick="changeSetting('estonia', this)">1950</div>
     <div class="node" onclick="changeSetting('evergreen', this)">1980</div>
     <div class="node" onclick="changeSetting('tokyo', this)">2005</div>
+    <div class="node" onclick="changeSetting('hospital2010')">2010</div>
+    <div class="node" onclick="changeSetting('arcticblacksite')">2030</div>
     <div class="node" onclick="changeSetting('space', this)">2300</div>
   </section>
 
+  <div class="timeline-arrow right" onclick="scrollTimeline(1)">›</div>
+</div>
+
+
+
+
+/*SETTINGS */
+
+
+
+
   <script>
     const settings = {
+
+
+
+hospital2010: {
+  theme: "theme-hospital",
+  title: "2010 Abandoned Research Hospital",
+  tagline: "The recordings didn’t stop when the staff left.",
+  image: "2010hospital.png",
+
+  mapImage: "2010map.png",
+  mapLabel: "St. Dymphna Research Facility",
+
+  systems: {
+    vampire: {
+      section1Title: "Feeding in Silence",
+      section2Title: "Closed System",
+      section3Title: "Predator or Patient",
+      box1: "A predator can hide here, but not control it.",
+      box2: "The building traps both hunter and hunted.",
+      box3: "Something else may already dominate this space."
+    },
+
+    werewolf: {
+      section1Title: "Wounded Ground",
+      section2Title: "Spirits of Suffering",
+      section3Title: "Corruption Inside",
+      box1: "Pain and experimentation have poisoned the spiritual reflection.",
+      box2: "Spirits here are fractured and unstable.",
+      box3: "The building itself feels wrong."
+    },
+
+    mage: {
+      section1Title: "Broken Reality",
+      section2Title: "Experimental Practices",
+      section3Title: "The Residue",
+      box1: "Experiments may have altered perception or reality itself.",
+      box2: "The hospital operated beyond ethical limits.",
+      box3: "Something remains active in the structure."
+    },
+
+    changeling: {
+      section1Title: "Dreams Turned Dark",
+      section2Title: "Glamour in Fear",
+      section3Title: "Nightmare Space",
+      box1: "Fear has replaced wonder completely.",
+      box2: "The building feeds on emotional intensity.",
+      box3: "Nothing here feels safe or real."
+    },
+
+    hunter: {
+      section1Title: "The Case File",
+      section2Title: "Missing Persons",
+      section3Title: "The Truth Inside",
+      box1: "Reports point to disappearances and unexplained events.",
+      box2: "Evidence suggests something ongoing.",
+      box3: "Entering the building means becoming part of the case."
+    },
+
+    wraith: {
+      section1Title: "Trapped Souls",
+      section2Title: "Unfinished Pain",
+      section3Title: "No Exit",
+      box1: "Patients died without closure or recognition.",
+      box2: "Their suffering binds them here.",
+      box3: "Some do not realize they are dead."
+    },
+
+    promethean: {
+      section1Title: "Constructed Humanity",
+      section2Title: "Experiments on Life",
+      section3Title: "Rejected Existence",
+      box1: "The facility may have created or altered life.",
+      box2: "Humanity was studied, not respected.",
+      box3: "What was made here may still remain."
+    },
+
+    coc: {
+      section1Title: "Beyond Medicine",
+      section2Title: "Forbidden Knowledge",
+      section3Title: "Something Else",
+      box1: "The research may have uncovered something inhuman.",
+      box2: "The hospital’s purpose may not have been healing.",
+      box3: "The truth is not meant to be understood."
+    },
+
+    kob: {
+      section1Title: "Urban Legends",
+      section2Title: "Dare to Enter",
+      section3Title: "Something Real",
+      box1: "Stories about the hospital attract the curious.",
+      box2: "Exploration quickly becomes dangerous.",
+      box3: "Not everyone leaves with the same memories."
+    },
+
+    ghosthunter: {
+      section1Title: "Recorded Evidence",
+      section2Title: "Active Phenomena",
+      section3Title: "Unstable Truth",
+      box1: "Voices respond directly to investigators.",
+      box2: "Devices capture contradictory data.",
+      box3: "Evidence changes after being recorded."
+    }
+  },
+
+  fit: [
+    { system: "Ghost Hunter", rating: 5, reason: "Perfect mix of technology, hauntings and controlled environment." },
+    { system: "Wraith", rating: 5, reason: "Unresolved suffering creates powerful ghost presence." },
+    { system: "Hunter", rating: 5, reason: "Investigation-driven horror fits perfectly." },
+    { system: "Call of Cthulhu", rating: 4, reason: "Experiments and unknown forces support cosmic horror." },
+    { system: "Mage", rating: 4, reason: "Reality distortion and experimentation fit well." },
+    { system: "Vampire", rating: 3, reason: "Possible but not dominant." },
+    { system: "Werewolf", rating: 3, reason: "Spiritual corruption exists but limited territory." },
+    { system: "Promethean", rating: 3, reason: "Themes fit but are situational." },
+    { system: "Changeling", rating: 2, reason: "Fear suppresses Glamour." },
+    { system: "Kids on Bikes", rating: 2, reason: "Urban legend angle works, but tone is heavy." }
+  ],
+
+  locations: [
+    "Patient Ward",
+    "Isolation Rooms",
+    "Operating Theater",
+    "Basement Archive",
+    "Security Office",
+    "Abandoned Lab",
+    "Underground Tunnel",
+    "Rooftop Helipad"
+  ]
+},      
+
+plague1400: {
+  theme: "theme-plague",
+  title: "1400 Plague Europe",
+  tagline: "The dead outnumber the living.",
+  image: "1400plague.png",
+
+  mapImage: "1400map.png",
+  mapLabel: "Western Europe",
+
+  systems: {
+    vampire: {
+      section1Title: "Feast Without Order",
+      section2Title: "No Masquerade",
+      section3Title: "Predators Among Corpses",
+      box1: "The plague provides endless feeding, but no stability.",
+      box2: "Society is collapsing — control is nearly impossible.",
+      box3: "Even predators risk becoming part of the dead they feed on."
+    },
+
+    werewolf: {
+      section1Title: "Corrupted Land",
+      section2Title: "Spirits of Rot",
+      section3Title: "Rage Against Decay",
+      box1: "The land itself feels sick and unbalanced.",
+      box2: "Spirits of disease, rot and despair spread unchecked.",
+      box3: "This is not natural — something is deeply wrong."
+    },
+
+    mage: {
+      section1Title: "Faith and Desperation",
+      section2Title: "Miracles and Curses",
+      section3Title: "Reality Breaking",
+      box1: "Belief is at its strongest — and most unstable.",
+      box2: "Healing, curses and divine acts blur together.",
+      box3: "Reality fractures under fear, prayer and despair."
+    },
+
+    changeling: {
+      section1Title: "Dreams Dying",
+      section2Title: "Glamour Fading",
+      section3Title: "Nightmare Rising",
+      box1: "Wonder cannot survive constant death.",
+      box2: "Glamour weakens as fear dominates every story.",
+      box3: "Nightmares become stronger than dreams."
+    },
+
+    hunter: {
+      section1Title: "Blame and Fear",
+      section2Title: "False Monsters",
+      section3Title: "The Desperate Hunt",
+      box1: "People need something to blame for the plague.",
+      box2: "Accusations spread faster than disease.",
+      box3: "Hunters risk becoming worse than what they hunt."
+    },
+
+    wraith: {
+      section1Title: "Endless Dead",
+      section2Title: "Mass Graves",
+      section3Title: "No Rest",
+      box1: "The dead are everywhere, with no rites or remembrance.",
+      box2: "Mass graves prevent closure or peace.",
+      box3: "The boundary between living and dead is dangerously thin."
+    },
+
+    promethean: {
+      section1Title: "The Walking Corpse",
+      section2Title: "Mistaken for Plague",
+      section3Title: "No Humanity Here",
+      box1: "A Created being is indistinguishable from death itself.",
+      box2: "Fear ensures immediate rejection or destruction.",
+      box3: "Humanity is impossible to find in a dying world."
+    },
+
+    coc: {
+      section1Title: "Cosmic Punishment",
+      section2Title: "Something Behind the Plague",
+      section3Title: "Truth Is Worse",
+      box1: "The plague may not be natural.",
+      box2: "Ancient forces may be feeding on human collapse.",
+      box3: "Understanding the truth may accelerate the end."
+    },
+
+    kob: {
+      section1Title: "Orphaned Children",
+      section2Title: "Survival Alone",
+      section3Title: "Small Hope",
+      box1: "Children are left to survive in empty villages.",
+      box2: "They adapt faster than broken adults.",
+      box3: "Hope exists — but it is fragile."
+    },
+
+    ghosthunter: {
+      section1Title: "Voices Everywhere",
+      section2Title: "Hauntings Without End",
+      section3Title: "No Silence",
+      box1: "The dead never stop speaking.",
+      box2: "Every place is haunted.",
+      box3: "There is no way to separate truth from fear."
+    }
+  },
+
+  fit: [
+    {
+      system: "Wraith",
+      rating: 5,
+      reason: "Mass death, unfinished lives and broken burial rites make this a perfect Wraith setting."
+    },
+    {
+      system: "Hunter",
+      rating: 5,
+      reason: "Fear, blame and desperation create constant hunts — both real and misguided."
+    },
+    {
+      system: "Vampire",
+      rating: 5,
+      reason: "Endless feeding opportunities exist, but without structure or safety."
+    },
+    {
+      system: "Mage",
+      rating: 4,
+      reason: "Belief is powerful, but chaotic and unstable."
+    },
+    {
+      system: "Call of Cthulhu",
+      rating: 4,
+      reason: "The plague can easily be tied to cosmic or unknowable forces."
+    },
+    {
+      system: "Werewolf",
+      rating: 4,
+      reason: "Spiritual corruption and imbalance are overwhelming."
+    },
+    {
+      system: "Promethean",
+      rating: 3,
+      reason: "Themes fit strongly, but survival is extremely difficult."
+    },
+    {
+      system: "Ghost Hunter",
+      rating: 3,
+      reason: "Hauntings are constant, but investigation is nearly impossible."
+    },
+    {
+      system: "Changeling",
+      rating: 2,
+      reason: "Glamour is heavily suppressed by fear and death."
+    },
+    {
+      system: "Kids on Bikes",
+      rating: 1,
+      reason: "The tone is far too bleak for this system."
+    }
+  ],
+
+  locations: [
+    "Abandoned Village",
+    "Mass Grave Pit",
+    "Plague Cart Road",
+    "Burned Chapel",
+    "Quarantined Town Gate",
+    "Field Hospital",
+    "Silent Farmland",
+    "Collapsed Monastery"
+  ]
+},
+
+amazon1520: {
+  theme: "theme-amazon",
+  title: "1520 Amazon Expedition",
+  tagline: "The river does not lead out.",
+  image: "1520amazon.png",
+
+  mapImage: "1520map.png",
+  mapLabel: "Upper Amazon Basin",
+
+  systems: {
+    vampire: {
+      section1Title: "Blood in the Green",
+      section2Title: "Isolation Feeding",
+      section3Title: "Predator Without Domain",
+      box1: "A vampire here cannot rule — only survive.",
+      box2: "Feeding risks exposure in a tight, fragile expedition.",
+      box3: "The jungle does not tolerate a predator above it."
+    },
+
+    werewolf: {
+      section1Title: "Sacred Territory",
+      section2Title: "Spirits of Growth",
+      section3Title: "The Intrusion",
+      box1: "The jungle is alive, aware and not passive.",
+      box2: "Spirits of river, root and beast move constantly.",
+      box3: "The expedition is not exploration — it is a wound."
+    },
+
+    mage: {
+      section1Title: "Clashing Realities",
+      section2Title: "Belief vs Belief",
+      section3Title: "Unstable Truth",
+      box1: "European logic fractures under unfamiliar rules.",
+      box2: "Local belief systems shape reality more strongly here.",
+      box3: "The deeper you go, the less your worldview applies."
+    },
+
+    changeling: {
+      section1Title: "Living Dream",
+      section2Title: "Glamour of the Wild",
+      section3Title: "Dangerous Wonder",
+      box1: "The jungle feels like a dream that never ends.",
+      box2: "Every sound, color and movement carries Glamour.",
+      box3: "Wonder turns hostile when misunderstood."
+    },
+
+    hunter: {
+      section1Title: "The Wrong Hunt",
+      section2Title: "Paranoia",
+      section3Title: "Survival First",
+      box1: "The expedition begins hunting something it cannot define.",
+      box2: "Accusations rise as fear replaces understanding.",
+      box3: "Eventually, the only goal is staying alive."
+    },
+
+    wraith: {
+      section1Title: "The Dead Left Behind",
+      section2Title: "Unmarked Graves",
+      section3Title: "The River Remembers",
+      box1: "The jungle consumes the dead quickly — but not completely.",
+      box2: "No graves, no rites, no peace.",
+      box3: "The river carries voices no one admits hearing."
+    },
+
+    promethean: {
+      section1Title: "The Unnatural Thing",
+      section2Title: "Rejection by All",
+      section3Title: "No Place to Exist",
+      box1: "A Created being is wrong everywhere — but especially here.",
+      box2: "The land itself reacts against unnatural existence.",
+      box3: "Humanity feels distant and irrelevant."
+    },
+
+    coc: {
+      section1Title: "The Lost City",
+      section2Title: "What Came Before",
+      section3Title: "The Price of Discovery",
+      box1: "The expedition searches for something rumored, not understood.",
+      box2: "The jungle hides structures older than memory.",
+      box3: "The discovery should not be brought back."
+    },
+
+    kob: {
+      section1Title: "Young Survivors",
+      section2Title: "The Jungle Game",
+      section3Title: "Sticking Together",
+      box1: "Children or young members adapt faster than adults.",
+      box2: "They notice patterns others ignore.",
+      box3: "Friendship becomes the only stability."
+    },
+
+    ghosthunter: {
+      section1Title: "Spirits Without Names",
+      section2Title: "Unrecorded Phenomena",
+      section3Title: "No Proof Survives",
+      box1: "Encounters cannot be documented or explained.",
+      box2: "Every attempt to record truth fails.",
+      box3: "Evidence dissolves as quickly as it appears."
+    }
+  },
+
+  fit: [
+    {
+      system: "Werewolf",
+      rating: 5,
+      reason: "Sacred land, powerful spirits and violent intrusion make this a perfect Werewolf setting."
+    },
+    {
+      system: "Mage",
+      rating: 5,
+      reason: "Conflicting belief systems and unstable reality create strong magical tension."
+    },
+    {
+      system: "Call of Cthulhu",
+      rating: 5,
+      reason: "Lost civilizations and forbidden discoveries make this ideal cosmic horror."
+    },
+    {
+      system: "Hunter",
+      rating: 5,
+      reason: "Fear, paranoia and survival turn the expedition into a desperate hunt."
+    },
+    {
+      system: "Changeling",
+      rating: 5,
+      reason: "The jungle is rich with Glamour, but dangerous to interpret."
+    },
+    {
+      system: "Wraith",
+      rating: 4,
+      reason: "Unmarked deaths and forgotten bodies create restless spirits."
+    },
+    {
+      system: "Vampire",
+      rating: 3,
+      reason: "Feeding is possible but unstable, with no real domain to control."
+    },
+    {
+      system: "Promethean",
+      rating: 3,
+      reason: "Strong outsider themes, but constant rejection limits sustainability."
+    },
+    {
+      system: "Ghost Hunter",
+      rating: 2,
+      reason: "Phenomena are strong, but cannot be properly investigated or recorded."
+    },
+    {
+      system: "Kids on Bikes",
+      rating: 2,
+      reason: "Youth survival stories work, but tone is much darker than typical play."
+    }
+  ],
+
+  locations: [
+    "River Encampment",
+    "Collapsed Expedition Camp",
+    "The Overgrown Path",
+    "Hidden Stone Structure",
+    "Flooded Cavern",
+    "Abandoned Village",
+    "The Deep Canopy",
+    "The River Bend"
+  ]
+},
+
+arcticblacksite: {
+  theme: "theme-arcticblacksite",
+  title: "2030 Arctic Black Site",
+  tagline: "The ice keeps what governments bury.",
+  image: "2030arcticblacksite.png",
+
+  mapImage: "2030map.png",
+  mapLabel: "Station Borealis",
+
+  systems: {
+    vampire: {
+      section1Title: "Blood Supply",
+      section2Title: "Closed Facility",
+      section3Title: "Predator in Containment",
+      box1: "In a sealed station, every living body is a counted resource.",
+      box2: "Security systems track movement, sleep cycles and blood loss.",
+      box3: "A vampire here is either prisoner, asset or disaster."
+    },
+
+    werewolf: {
+      section1Title: "Dead White Territory",
+      section2Title: "Spirits of Cold Machinery",
+      section3Title: "Rage Under Ice",
+      box1: "The land feels ancient, wounded and almost silent.",
+      box2: "Machine spirits, satellite ghosts and buried things stir beneath the ice.",
+      box3: "The black site is a violation that the spirits cannot ignore."
+    },
+
+    mage: {
+      section1Title: "Experimental Reality",
+      section2Title: "Classified Paradigms",
+      section3Title: "The Breach",
+      box1: "The site exists to test theories that should not work.",
+      box2: "Science, occult math and forbidden models overlap in sealed labs.",
+      box3: "Reality is thin where the experiment failed."
+    },
+
+    changeling: {
+      section1Title: "Sterile Dreams",
+      section2Title: "Glamour in Isolation",
+      section3Title: "Cold Banality",
+      box1: "Wonder survives only in memory, hallucination and impossible lights under the ice.",
+      box2: "The staff dream of home, warmth and things that answer from below.",
+      box3: "Routine, secrecy and fear grind imagination into numbness."
+    },
+
+    hunter: {
+      section1Title: "Something Loose",
+      section2Title: "Containment Failure",
+      section3Title: "The Last Team",
+      box1: "The first reports are missing hours, corrupted footage and blood on locked doors.",
+      box2: "Whatever escaped knows the facility better than the response team does.",
+      box3: "The hunt becomes survival before anyone understands the target."
+    },
+
+    wraith: {
+      section1Title: "The Frozen Dead",
+      section2Title: "Unreported Casualties",
+      section3Title: "Echoes in the Walls",
+      box1: "People died here officially, unofficially and not at all.",
+      box2: "Names were removed from records, but not from the Shadowlands.",
+      box3: "The dead speak through vents, radios and frost on glass."
+    },
+
+    promethean: {
+      section1Title: "Built in the Cold",
+      section2Title: "Artificial Humanity",
+      section3Title: "The Prototype Wakes",
+      box1: "Something made in the lab opens its eyes and asks why it exists.",
+      box2: "Scientists call it success. Security calls it containment.",
+      box3: "The Created must learn humanity from people who buried their own."
+    },
+
+    coc: {
+      section1Title: "The Thing Beneath",
+      section2Title: "Prehuman Signal",
+      section3Title: "Sanity Failure",
+      box1: "The ice did not preserve something dead. It imprisoned something waiting.",
+      box2: "The signal predates language, biology and human fear.",
+      box3: "Understanding the discovery is worse than freezing outside."
+    },
+
+    kob: {
+      section1Title: "Children of the Staff",
+      section2Title: "Restricted Corridors",
+      section3Title: "Friends in Lockdown",
+      box1: "A few children live at the station because someone decided families improve morale.",
+      box2: "They know vents, service tunnels and forbidden doors better than adults.",
+      box3: "When lockdown begins, the kids are the only ones small enough to move unseen."
+    },
+
+    ghosthunter: {
+      section1Title: "Electronic Hauntings",
+      section2Title: "Anomalous Evidence",
+      section3Title: "The Case That Eats Proof",
+      box1: "Recordings capture voices from rooms that were never built.",
+      box2: "Thermal cameras, radios and motion sensors contradict each other.",
+      box3: "Every piece of evidence changes after someone watches it."
+    }
+  },
+
+  fit: [
+    {
+      system: "Call of Cthulhu",
+      rating: 5,
+      reason: "A buried prehuman discovery, isolation and institutional secrecy make this ideal cosmic horror."
+    },
+    {
+      system: "Hunter",
+      rating: 5,
+      reason: "Containment failure, survival pressure and an unknown target make the hunt immediate and brutal."
+    },
+    {
+      system: "Promethean",
+      rating: 5,
+      reason: "Artificial life, unethical creation and the search for humanity fit perfectly."
+    },
+    {
+      system: "Ghost Hunter",
+      rating: 5,
+      reason: "Sensors, recordings, anomalies and haunted technology make investigation central."
+    },
+    {
+      system: "Mage",
+      rating: 4,
+      reason: "Experimental reality, classified research and broken paradigms create strong Mage material."
+    },
+    {
+      system: "Wraith",
+      rating: 4,
+      reason: "Secret deaths, erased records and frozen remains create powerful ghost stories."
+    },
+    {
+      system: "Werewolf",
+      rating: 3,
+      reason: "The violated land and machine spirits fit, but the sterile facility limits traditional territory play."
+    },
+    {
+      system: "Vampire",
+      rating: 3,
+      reason: "Closed populations create intense feeding tension, but long-term play is restrictive."
+    },
+    {
+      system: "Changeling",
+      rating: 2,
+      reason: "Isolation and sterile routines suppress Glamour, though hallucination and wonder can still work."
+    },
+    {
+      system: "Kids on Bikes",
+      rating: 2,
+      reason: "Child protagonists in lockdown can work, but the setting is harsher and more adult than usual."
+    }
+  ],
+
+  locations: [
+    "Station Borealis",
+    "Sublevel 3 Laboratory",
+    "The Ice Core Vault",
+    "Satellite Array",
+    "Crew Habitation Wing",
+    "Containment Corridor",
+    "Abandoned Drill Shaft",
+    "Whiteout Perimeter"
+  ]
+},
+
+neworleans: {
+  theme: "theme-neworleans",
+  title: "1880 New Orleans",
+  tagline: "The night breathes, and remembers.",
+  image: "1880neworleans.png",
+
+  mapImage: "1880map.png",
+  mapLabel: "French Quarter",
+
+  systems: {
+    vampire: {
+      section1Title: "Old Blood in New Money",
+      section2Title: "Hidden Courts",
+      section3Title: "The Endless Night",
+      box1: "Kindred rule through lineage, vice and quiet influence.",
+      box2: "Power moves through salons, brothels and private gatherings.",
+      box3: "The city never truly sleeps — and neither do they."
+    },
+
+    werewolf: {
+      section1Title: "Swamp Territory",
+      section2Title: "Rot and Spirit",
+      section3Title: "Encroaching Decay",
+      box1: "The swamps and riverbanks are alive with wounded spirits.",
+      box2: "Decay, water and memory mix into unstable spiritual ground.",
+      box3: "The city spreads like a sickness into sacred land."
+    },
+
+    mage: {
+      section1Title: "Living Magic",
+      section2Title: "Ritual and Rhythm",
+      section3Title: "Belief Made Real",
+      box1: "Magic lives in song, ritual, and shared belief.",
+      box2: "Different traditions clash and blend in the same streets.",
+      box3: "Reality bends easily where belief is communal."
+    },
+
+    changeling: {
+      section1Title: "Carnival Dreams",
+      section2Title: "Glamour in Music",
+      section3Title: "Banality in Vice",
+      box1: "Festivals, masks and stories keep wonder alive.",
+      box2: "Music and performance create powerful Glamour.",
+      box3: "Vice and repetition slowly grind dreams away."
+    },
+
+    hunter: {
+      section1Title: "Sin and Suspicion",
+      section2Title: "Patterns in the Night",
+      section3Title: "The Quiet Hunt",
+      box1: "Disappearances blend into the city's excess.",
+      box2: "Certain places and people repeat in disturbing patterns.",
+      box3: "Hunters follow blood trails through pleasure and decay."
+    },
+
+    wraith: {
+      section1Title: "The Restless Dead",
+      section2Title: "Above and Below",
+      section3Title: "Memory Never Fades",
+      box1: "The dead linger close, tied to place and family.",
+      box2: "Burial grounds and flooded earth blur boundaries.",
+      box3: "The city remembers every life it takes."
+    },
+
+    promethean: {
+      section1Title: "Made in Secret",
+      section2Title: "Crowds Without Belonging",
+      section3Title: "Humanity at a Distance",
+      box1: "A Created being can hide in the crowd, but never belong.",
+      box2: "The city tolerates difference — until it notices too closely.",
+      box3: "Humanity feels close, but never within reach."
+    },
+
+    coc: {
+      section1Title: "Rituals in the Dark",
+      section2Title: "Old Gods in New Places",
+      section3Title: "The River Below",
+      box1: "Some rituals call to things older than memory.",
+      box2: "Secret societies gather in hidden rooms and back alleys.",
+      box3: "The river carries whispers that are not human."
+    },
+
+    kob: {
+      section1Title: "Street Kids",
+      section2Title: "Strange Festivals",
+      section3Title: "Secrets Together",
+      box1: "Children know the alleys, rooftops and hidden places.",
+      box2: "Festivals hide things adults refuse to see.",
+      box3: "Friendship is the only safety in a dangerous city."
+    },
+
+    ghosthunter: {
+      section1Title: "Haunted City",
+      section2Title: "Spirits and Stories",
+      section3Title: "Evidence in Decay",
+      box1: "The city is full of hauntings tied to memory and place.",
+      box2: "Stories overlap with real phenomena in unsettling ways.",
+      box3: "Every investigation uncovers more than expected."
+    }
+  },
+
+  fit: [
+    {
+      system: "Vampire",
+      rating: 5,
+      reason: "Politics, decadence and lineage create a perfect environment for Kindred power."
+    },
+    {
+      system: "Mage",
+      rating: 5,
+      reason: "Shared belief, ritual and cultural magic create a powerful reality-bending environment."
+    },
+    {
+      system: "Wraith",
+      rating: 5,
+      reason: "Death, memory and burial traditions make the dead ever-present."
+    },
+    {
+      system: "Changeling",
+      rating: 4,
+      reason: "Music, festivals and stories generate strong Glamour."
+    },
+    {
+      system: "Hunter",
+      rating: 4,
+      reason: "Vice, secrecy and disappearances create strong investigative threads."
+    },
+    {
+      system: "Call of Cthulhu",
+      rating: 4,
+      reason: "Rituals and hidden knowledge can easily turn toward cosmic horror."
+    },
+    {
+      system: "Werewolf",
+      rating: 3,
+      reason: "Spiritual corruption exists, but urban spread limits territory."
+    },
+    {
+      system: "Promethean",
+      rating: 3,
+      reason: "Outsider themes fit, but belonging is difficult."
+    },
+    {
+      system: "Ghost Hunter",
+      rating: 3,
+      reason: "Hauntings are strong, though the framework leans modern."
+    },
+    {
+      system: "Kids on Bikes",
+      rating: 2,
+      reason: "Urban childhood stories work, but tone is darker than typical play."
+    }
+  ],
+
+  locations: [
+    "French Quarter",
+    "Cemetery District",
+    "River Docks",
+    "Old Cathedral",
+    "Back Alley Clubs",
+    "Swamp Edge"
+  ]
+},
+
+
+salem: {
+  theme: "theme-salem",
+  title: "1690s Salem",
+  tagline: "Every prayer has a shadow.",
+  image: "1690salem.png",
+  mapImage: "1690map.png",
+  mapLabel: "Salem Village",
+
+  systems: {
+    vampire: {
+      section1Title: "Blood and Accusation",
+      section2Title: "Fear as Control",
+      section3Title: "The Night Confession",
+      box1: "Predators hide behind piety, suspicion and family reputation.",
+      box2: "A whisper can destroy a life faster than fangs.",
+      box3: "Some confessions are extracted. Others are fed upon."
+    },
+    werewolf: {
+      section1Title: "The Forest Boundary",
+      section2Title: "Restless Spirits",
+      section3Title: "Rage and Purity",
+      box1: "The woods outside Salem are feared for reasons older than scripture.",
+      box2: "Spirits gather around fear, guilt and violated land.",
+      box3: "The village calls it sin. The Garou smell corruption."
+    },
+    mage: {
+      section1Title: "Faith and Will",
+      section2Title: "Forbidden Practice",
+      section3Title: "Reality on Trial",
+      box1: "Belief is sharp enough to cut reality.",
+      box2: "Charms, dreams and old rites survive beneath scripture.",
+      box3: "The court decides what is true, but truth resists."
+    },
+    changeling: {
+      section1Title: "Dark Fairy Tales",
+      section2Title: "Glamour of Fear",
+      section3Title: "Childhood Accusations",
+      box1: "Stories become dangerous when adults start believing them literally.",
+      box2: "Glamour hides in rhymes, dreams, visions and whispered warnings.",
+      box3: "Wonder curdles when imagination is punished."
+    },
+    hunter: {
+      section1Title: "The Wrong Hunt",
+      section2Title: "Signs of Evil",
+      section3Title: "Truth and Fire",
+      box1: "Hunters must decide whether the village is haunted, cursed or simply afraid.",
+      box2: "Every sign can become proof if people want it badly enough.",
+      box3: "The monster may be real — but so is the mob."
+    },
+    wraith: {
+      section1Title: "The Hanged Dead",
+      section2Title: "Unfinished Names",
+      section3Title: "Guilt in the Walls",
+      box1: "Those killed by accusation do not rest easily.",
+      box2: "Names spoken in court echo long after burial.",
+      box3: "Every home carries a ghost of what it allowed."
+    },
+    promethean: {
+      section1Title: "The Accursed Body",
+      section2Title: "Made Wrong",
+      section3Title: "No Mercy Here",
+      box1: "A Created being would be seen as proof of evil.",
+      box2: "Disquiet spreads quickly in a village already looking for monsters.",
+      box3: "To seek humanity here is to walk directly into judgment."
+    },
+    coc: {
+      section1Title: "The Shape Behind Faith",
+      section2Title: "Forbidden Knowledge",
+      section3Title: "Madness in Testimony",
+      box1: "Something vast may be using human fear as a doorway.",
+      box2: "Old texts and stranger dreams point beyond Christian terror.",
+      box3: "The more the village explains, the less sane it becomes."
+    },
+    kob: {
+      section1Title: "Children Who See",
+      section2Title: "Games Turned Dark",
+      section3Title: "No One Believes Them",
+      box1: "Children notice patterns adults turn into accusations.",
+      box2: "A childish game becomes evidence of something terrible.",
+      box3: "Friendship is fragile when fear teaches betrayal."
+    },
+    ghosthunter: {
+      section1Title: "The Haunted Court",
+      section2Title: "Spectral Evidence",
+      section3Title: "Proof After Death",
+      box1: "The village is full of reports, visions and impossible visitations.",
+      box2: "Every haunting is tangled with rumor and guilt.",
+      box3: "The evidence may be real, but it may not be trustworthy."
+    }
+  },
+
+  fit: [
+    {
+      system: "Hunter",
+      rating: 5,
+      reason: "Fear, accusation and moral panic make hunting dangerous, ambiguous and morally unstable."
+    },
+    {
+      system: "Mage",
+      rating: 5,
+      reason: "Faith, belief, folk magic and contested truth make reality itself feel unstable."
+    },
+    {
+      system: "Call of Cthulhu",
+      rating: 5,
+      reason: "Paranoia, forbidden knowledge and unseen forces thrive in isolated religious terror."
+    },
+    {
+      system: "Wraith",
+      rating: 5,
+      reason: "Executions, guilt and unresolved injustice create extremely strong restless-dead stories."
+    },
+    {
+      system: "Vampire",
+      rating: 4,
+      reason: "Predators can exploit fear, hierarchy and secrecy, though feeding is risky in a small village."
+    },
+    {
+      system: "Changeling",
+      rating: 4,
+      reason: "Folklore, fear and childhood imagination create strong dark Glamour."
+    },
+    {
+      system: "Werewolf",
+      rating: 3,
+      reason: "Spiritual corruption and wild boundaries fit, but the story is more human than territorial."
+    },
+    {
+      system: "Promethean",
+      rating: 3,
+      reason: "The outsider theme is powerful, but Disquiet would make survival brutally difficult."
+    },
+    {
+      system: "Ghost Hunter",
+      rating: 2,
+      reason: "Hauntings fit well, but formal investigation feels somewhat anachronistic."
+    },
+    {
+      system: "Kids on Bikes",
+      rating: 1,
+      reason: "Children seeing the truth works, but the tone is too oppressive for the system’s usual feel."
+    }
+  ],
+
+  locations: [
+    "Meeting House",
+    "Parris Household",
+    "The Accused Cellar",
+    "Gallows Hill",
+    "The Witch Road",
+    "The Black Wood"
+  ]
+},
 
       carpathian: {
         theme: "theme-carpathian",
@@ -1467,56 +2439,41 @@ function changeSetting(setting) {
   body.classList.add("fade-out");
 
   setTimeout(() => {
+    document.querySelectorAll(".node, .quick-item")
+      .forEach(el => el.classList.remove("active"));
 
-        /* active state sync */
-        document.querySelectorAll('.node, .quick-item')
-          .forEach(el => el.classList.remove('active'));
+    document.querySelectorAll(`[onclick*="${setting}"]`)
+      .forEach(el => el.classList.add("active"));
 
-        document.querySelectorAll(`[onclick*="${setting}"]`)
-          .forEach(el => el.classList.add('active'));
+    body.className = data.theme;
 
-        /* theme */
-        body.className = data.theme;
+    title.innerText = data.title;
+    tagline.innerText = data.tagline;
 
-        /* text */
-        title.innerText = data.title;
-        tagline.innerText = data.tagline;
+    document.querySelectorAll(".system-selector button")
+      .forEach(btn => btn.classList.remove("active"));
 
-        applySystem();
-        updateFitBox();
-        // reset system til default
-currentSetting = setting;
-localStorage.setItem("lastSetting", setting);
+    const activeBtn = document.querySelector(`[data-system="${currentSystem}"]`);
+    if (activeBtn) activeBtn.classList.add("active");
 
-currentSystem = localStorage.getItem(`lastSystem_${setting}`) || "changeling";
+    applySystem();
+    updateFitBox();
 
-document.querySelectorAll(".system-selector button")
-  .forEach(btn => btn.classList.remove("active"));
-
-const activeBtn = document.querySelector(`[data-system="${currentSystem}"]`);
-if (activeBtn) activeBtn.classList.add("active");
-
-
-
-        /* hero image */
-        if (data.image) {
-hero.style.backgroundImage =
-  `linear-gradient(rgba(20,30,20,0.15), rgba(10,15,10,0.25)), url('${data.image}')`;
-        }
-
-        /* map */
-        if (data.mapImage) mapimg.src = data.mapImage;
-        if (data.mapLabel) maplabel.innerText = data.mapLabel;
-
-        /* animation reset */
-        heroText.style.animation = "none";
-        heroText.offsetHeight;
-        heroText.style.animation = "";
-
-        body.classList.remove("fade-out");
-
-      }, 200);
+    if (data.image) {
+      hero.style.backgroundImage =
+        `linear-gradient(rgba(20,30,20,0.15), rgba(10,15,10,0.25)), url('${data.image}')`;
     }
+
+    if (data.mapImage) mapimg.src = data.mapImage;
+    if (data.mapLabel) maplabel.innerText = data.mapLabel;
+
+    heroText.style.animation = "none";
+    heroText.offsetHeight;
+    heroText.style.animation = "";
+
+    body.classList.remove("fade-out");
+  }, 200);
+}
 
     /* ===== PARALLAX ===== */
     document.addEventListener("mousemove", (e) => {
@@ -1704,6 +2661,15 @@ function toggleFit() {
 
   list.classList.toggle("open");
   toggle.classList.toggle("open");
+}
+
+function scrollTimeline(direction) {
+  const timeline = document.getElementById("timeline");
+
+  timeline.scrollBy({
+    left: direction * 240,
+    behavior: "smooth"
+  });
 }
 
   </script>
